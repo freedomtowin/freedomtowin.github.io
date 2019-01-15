@@ -155,3 +155,51 @@ train.head(n=5)
   </tbody>
 </table>
 </div>
+
+
+<p>The weekday variable will be dummy coded and used later to compare results<p>
+
+<pre style='color:#000000;background:#ffffff;'>weekday_dummies = pd.get_dummies(train.weekday, prefix=<span style='color:#2a00ff; '>'W'</span>).iloc[:, 1:]
+train = pd.concat([train, weekday_dummies], axis=1)
+weekday_dummies = pd.get_dummies(valid.weekday, prefix=<span style='color:#2a00ff; '>'W'</span>).iloc[:, 1:]
+valid = pd.concat([valid, weekday_dummies], axis=1)
+</pre>
+
+<pre style='color:#000000;background:#ffffff;'>
+import Regression
+import DSP</pre>
+
+<p>Finding the overall trend:<p>
+
+<p>A polynomial term can be used to represent the trend component T(t) which can be created from the index variable. The complexity of the trend component can be tuned by using a training and validation set to find optimal complexity with the lowest sum of squared errors. A complexity of degree 2 had the lowest SSE value on the validation set so these terms will be included in the model.<p>
+
+<pre style='color:#000000;background:#ffffff;'>heap = []
+<span style='color:#7f0055; font-weight:bold; '>for</span> i <span style='color:#7f0055; font-weight:bold; '>in</span> <span style='color:#7f0055; font-weight:bold; '>range</span>(1,15):
+    z=Regression.sklearn_poly_regression(train[[<span style='color:#2a00ff; '>'index'</span>]],train[[<span style='color:#2a00ff; '>'Pageviews'</span>]],i)
+    SSE = Regression.numpy_poly_regression_SSE(valid[[<span style='color:#2a00ff; '>'index'</span>]],valid[[<span style='color:#2a00ff; '>'Pageviews'</span>]],i,z)
+    heap.append((SSE,i))
+Regression.heapsort(heap)
+</pre>
+
+
+
+<pre style='color:#000000;background:#ffffff;'>
+[(2501666772.2010365, 2),
+ (2699152210.1621375, 9),
+ (2699503808.6114817, 14),
+ (2701796858.0785437, 10),
+ (2701846050.0146337, 13),
+ (2702552306.8232799, 12),
+ (2706108691.5368271, 11),
+ (2990342895.3898125, 8),
+ (4491840385.0665913, 1),
+ (4868690323.6375523, 4),
+ (5963871838.3020554, 3),
+ (11208662852.721825, 5),
+ (317581251234.68689, 7),
+ (477442016671.72321, 6)]
+ </pre>
+
+<pre style='color:#000000;background:#ffffff;'>T_train = Regression.pandas_poly_feature(train[[<span style='color:#2a00ff; '>'index'</span>]],2)
+T_valid = Regression.pandas_poly_feature(valid[[<span style='color:#2a00ff; '>'index'</span>]],2)
+</pre>
