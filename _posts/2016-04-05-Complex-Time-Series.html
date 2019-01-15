@@ -58,3 +58,100 @@ A=x.T.dot(x) <span style='color:#3f7f59; '># x = intercept + predictor columns</
 b=x.T.dot(y) <span style='color:#3f7f59; '># y = target variable</span>
 z = np.linalg.solve(A,b)
 </pre>
+
+
+<p>This works perfectly for a dataset with a smaller number of non-collinear dimensions. However, the numpy algorithm can break with a dataset that has many collinear dimensions.<p>
+
+<p>For the purposes of this post, we will only focus on the T(t) and S(t) components. 80% of the data or 584 observations were used to create the training set. The model was validated on the remaining 146 observations.<p>
+
+<pre style='color:#000000;background:#ffffff;'><span style='color:#7f0055; font-weight:bold; '>import</span> pandas <span style='color:#7f0055; font-weight:bold; '>as</span> pd
+<span style='color:#7f0055; font-weight:bold; '>import</span> numpy <span style='color:#7f0055; font-weight:bold; '>as</span> np
+<span style='color:#7f0055; font-weight:bold; '>import</span> matplotlib.pyplot <span style='color:#7f0055; font-weight:bold; '>as</span> plt
+<span style='color:#7f0055; font-weight:bold; '>import</span> datetime
+
+full=pd.read_csv(<span style='color:#2a00ff; '>"DATA/DSC_Time_Series_Challenge.csv"</span>,dtype = {<span style='color:#2a00ff; '>'Day '</span>:<span style='color:#7f0055; font-weight:bold; '>str</span>,<span style='color:#2a00ff; '>'Sessions'</span>:<span style='color:#7f0055; font-weight:bold; '>int</span>,<span style='color:#2a00ff; '>'Pageviews'</span>:<span style='color:#7f0055; font-weight:bold; '>int</span>})
+time=[datetime.datetime.strptime(t[0],<span style='color:#2a00ff; '>"%m/%d/%y"</span>) <span style='color:#7f0055; font-weight:bold; '>for</span> t <span style='color:#7f0055; font-weight:bold; '>in</span> full[[<span style='color:#2a00ff; '>'Day '</span>]].values]
+weekday=[datetime.datetime.strptime(t[0],<span style='color:#2a00ff; '>"%m/%d/%y"</span>).isocalendar()[2] <span style='color:#7f0055; font-weight:bold; '>for</span> t <span style='color:#7f0055; font-weight:bold; '>in</span> full[[<span style='color:#2a00ff; '>'Day '</span>]].values]
+
+full[<span style='color:#2a00ff; '>'time'</span>]=time
+full[<span style='color:#2a00ff; '>'index'</span>]=np.arange(1,<span style='color:#7f0055; font-weight:bold; '>len</span>(full)+1)
+full[<span style='color:#2a00ff; '>'weekday'</span>]=weekday
+full=full.sort_values(by=[<span style='color:#2a00ff; '>'time'</span>])
+
+plt.plot(full[<span style='color:#2a00ff; '>'index'</span>],full[<span style='color:#2a00ff; '>'Pageviews'</span>],<span style='color:#2a00ff; '>'-'</span>)
+plt.xlabel(<span style='color:#2a00ff; '>'time'</span>)
+plt.ylabel(<span style='color:#2a00ff; '>'Pageviews'</span>)
+plt.title(<span style='color:#2a00ff; '>'Pageviews'</span>)
+plt.show()
+</pre>
+
+<p><img src='/ts_challenge_images/output_1_0.png' /></p>
+
+<pre style='color:#000000;background:#ffffff;'>train=full[:580].copy()
+valid=full[580:].copy()
+train.head(n=5)
+</pre>
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Day</th>
+      <th>Sessions</th>
+      <th>Pageviews</th>
+      <th>time</th>
+      <th>index</th>
+      <th>weekday</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>9/25/13</td>
+      <td>4370</td>
+      <td>7177</td>
+      <td>2013-09-25</td>
+      <td>1</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>9/26/13</td>
+      <td>5568</td>
+      <td>10760</td>
+      <td>2013-09-26</td>
+      <td>2</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>9/27/13</td>
+      <td>4321</td>
+      <td>8171</td>
+      <td>2013-09-27</td>
+      <td>3</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>9/28/13</td>
+      <td>2378</td>
+      <td>4093</td>
+      <td>2013-09-28</td>
+      <td>4</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>9/29/13</td>
+      <td>2612</td>
+      <td>4881</td>
+      <td>2013-09-29</td>
+      <td>5</td>
+      <td>7</td>
+    </tr>
+  </tbody>
+</table>
+</div>
