@@ -253,7 +253,7 @@ abs_filtered = np.absolute(DSP.filter_freq_domain(unfiltered, center,band,thresh
 Center frequency:  0.249568221071 Band:  0.14358883867 Threshold:  408.870795735
 </pre>
 
-<p><img src='/ts_challenge_images/output_13_0.png' /></p>
+<p><img src='/ts_challenge_images/output_13_2.png' /></p>
 
 <pre style='color:#000000;background:#ffffff;'>
 Frequency, Magnitude
@@ -293,3 +293,135 @@ Sequence list:  {3.0, 4.0, 7.0}
 <p><img src='/ts_challenge_images/output_15_2.png' /></p>
 <p><img src='/ts_challenge_images/output_15_3.png' /></p>
 <p><img src='/ts_challenge_images/output_15_4.png' /></p>
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Day</th>
+      <th>Sessions</th>
+      <th>Pageviews</th>
+      <th>time</th>
+      <th>index</th>
+      <th>weekday</th>
+      <th>W_2</th>
+      <th>W_3</th>
+      <th>W_4</th>
+      <th>W_5</th>
+      <th>W_6</th>
+      <th>W_7</th>
+      <th>seq_3.0</th>
+      <th>seq_4.0</th>
+      <th>seq_7.0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>580</th>
+      <td>4/28/15</td>
+      <td>13162</td>
+      <td>19757</td>
+      <td>2015-04-28</td>
+      <td>581</td>
+      <td>2</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>581</th>
+      <td>4/29/15</td>
+      <td>12395</td>
+      <td>18568</td>
+      <td>2015-04-29</td>
+      <td>582</td>
+      <td>3</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>582</th>
+      <td>4/30/15</td>
+      <td>12351</td>
+      <td>19122</td>
+      <td>2015-04-30</td>
+      <td>583</td>
+      <td>4</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>3.0</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>583</th>
+      <td>5/1/15</td>
+      <td>12301</td>
+      <td>19830</td>
+      <td>2015-05-01</td>
+      <td>584</td>
+      <td>5</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>584</th>
+      <td>5/2/15</td>
+      <td>9345</td>
+      <td>14110</td>
+      <td>2015-05-02</td>
+      <td>585</td>
+      <td>6</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>4.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>Eureka! Weekday (Sequence period = 7) shares the same frequency components as Pageviews!</p>
+<p>The table below shows the index and weekday to help illustrate what the periods or cycles. The index starts at 1, but this corresponds to weekday 3 (or Wednesday). So index 6 corresponds to Monday and index 2 corresponds to Thursday.</p>
+<p>Fitting the Model</p>
+<p>Since T(t) is already created, this part of the blog will focus on S(t).</p>
+<p>Each generated sequence will be made into pairs of seasonable components and will have at least two components, two sinusoidal waves, i.e. ?1sin(t/T) + ?2cos(t/T). In fact, the sum of weighted cosine & sine terms for each dominant frequency in the signal can be thought of as a Fourier Series. The difference is that the ? valus will only be estimated for the most dominant frequenciesinstead of an infinite, or large number of periodic waves.</p>
+<p>Fourier series formula</p>
+
+<p><img src='/ts_challenge_images/Fourier_Series_formula-1.tiff' /></p>
+
+<p>How is this done automatically?</p>
+<p>Consider an example where there exists a periodic signal of period 13 inside of the main signal.</p>
+<p>Seasonal components are generated automatically by first creating a saw tooth wave with a period of 13. This series represent the time component of a series of sinusoids with various periods. But how do we choose these periods? The saw tooth wave is unique in that each level appears only once in each period. By taking the FFT of this wave, the frequencies of this wave show how many sinusoids are needed to represent the wave at each unique level. By selecting the dominany freuquencies of this wave, a variery of shapes can be create for the seasonal component of period 13. This is accomplished by summing a set of orthogonal sine waves, with different periods, which use the save tooth wave as the time component. The saw tooth wave is used at the time component to force the resultant wave to have a period of 13.</p>
+<p>Sum of Cosines = β1sin(2*π*x/13) + β2cos(2*π*x/7) + β3cos(2*π*x/4) + β4cos(2*π*x/3) + β5cos(2*π*x/2) , 0 <= x < 13</p>
