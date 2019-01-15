@@ -49,9 +49,9 @@ tags:
 <li>R(t)~Residual error</li>
 </ul>
 
-<p>Objective function: minimize sum of squared errors<p>
+<p>Objective function: minimize sum of squared errors</p>
 
-<p>Closed form, least squared solution (Python code):<p>
+<p>Closed form, least squared solution (Python code):</p>
 
 <pre style='color:#000000;background:#ffffff;'><span style='color:#7f0055; font-weight:bold; '>import</span> numpy <span style='color:#7f0055; font-weight:bold; '>as</span> np
 A=x.T.dot(x) <span style='color:#3f7f59; '># x = intercept + predictor columns</span>
@@ -60,9 +60,9 @@ z = np.linalg.solve(A,b)
 </pre>
 
 
-<p>This works perfectly for a dataset with a smaller number of non-collinear dimensions. However, the numpy algorithm can break with a dataset that has many collinear dimensions.<p>
+<p>This works perfectly for a dataset with a smaller number of non-collinear dimensions. However, the numpy algorithm can break with a dataset that has many collinear dimensions.</p>
 
-<p>For the purposes of this post, we will only focus on the T(t) and S(t) components. 80% of the data or 584 observations were used to create the training set. The model was validated on the remaining 146 observations.<p>
+<p>For the purposes of this post, we will only focus on the T(t) and S(t) components. 80% of the data or 584 observations were used to create the training set. The model was validated on the remaining 146 observations.</p>
 
 <pre style='color:#000000;background:#ffffff;'><span style='color:#7f0055; font-weight:bold; '>import</span> pandas <span style='color:#7f0055; font-weight:bold; '>as</span> pd
 <span style='color:#7f0055; font-weight:bold; '>import</span> numpy <span style='color:#7f0055; font-weight:bold; '>as</span> np
@@ -157,7 +157,7 @@ train.head(n=5)
 </div>
 
 
-<p>The weekday variable will be dummy coded and used later to compare results<p>
+<p>The weekday variable will be dummy coded and used later to compare results</p>
 
 <pre style='color:#000000;background:#ffffff;'>weekday_dummies = pd.get_dummies(train.weekday, prefix=<span style='color:#2a00ff; '>'W'</span>).iloc[:, 1:]
 train = pd.concat([train, weekday_dummies], axis=1)
@@ -169,9 +169,9 @@ valid = pd.concat([valid, weekday_dummies], axis=1)
 import Regression
 import DSP</pre>
 
-<p>Finding the overall trend:<p>
+<p>Finding the overall trend:</p>
 
-<p>A polynomial term can be used to represent the trend component T(t) which can be created from the index variable. The complexity of the trend component can be tuned by using a training and validation set to find optimal complexity with the lowest sum of squared errors. A complexity of degree 2 had the lowest SSE value on the validation set so these terms will be included in the model.<p>
+<p>A polynomial term can be used to represent the trend component T(t) which can be created from the index variable. The complexity of the trend component can be tuned by using a training and validation set to find optimal complexity with the lowest sum of squared errors. A complexity of degree 2 had the lowest SSE value on the validation set so these terms will be included in the model.</p>
 
 <pre style='color:#000000;background:#ffffff;'>heap = []
 <span style='color:#7f0055; font-weight:bold; '>for</span> i <span style='color:#7f0055; font-weight:bold; '>in</span> <span style='color:#7f0055; font-weight:bold; '>range</span>(1,15):
@@ -203,3 +203,93 @@ Regression.heapsort(heap)
 <pre style='color:#000000;background:#ffffff;'>T_train = Regression.pandas_poly_feature(train[[<span style='color:#2a00ff; '>'index'</span>]],2)
 T_valid = Regression.pandas_poly_feature(valid[[<span style='color:#2a00ff; '>'index'</span>]],2)
 </pre>
+
+<p>Removing the overall trend:</p>
+
+<p>First, the overall trend needs to be removed from the signal in order to statisfy the stationary process assumption. This can be accomplished by creating a lag 1 differenced variable for Pageviews. This differenced variable will also make seasonal components easier to find.</p>
+
+<pre style='color:#000000;background:#ffffff;'>time_diff_signal = DSP.time_diff_variable(train[<span style='color:#2a00ff; '>'Pageviews'</span>],1)
+plt.plot(train[<span style='color:#2a00ff; '>'index'</span>][1:],time_diff_signal,<span style='color:#2a00ff; '>'-'</span>)
+plt.xlabel(<span style='color:#2a00ff; '>'time'</span>)
+plt.ylabel(<span style='color:#2a00ff; '>'Pageviews[t] - Pageviews[t-1]'</span>)
+plt.title(<span style='color:#2a00ff; '>'Pageviews[t] - Pageviews[t-1]'</span>)
+plt.show()
+</pre>
+<!--Created using ToHtml.com on 2019-01-15 03:09:20 UTC -->
+
+<p><img src='/ts_challenge_images/output_11_0.png' /></p>
+
+<p>The FFT transformation:</p>
+
+<p>Taking the FFT of the time differenced signal creates a complex magnitude representation for each sinusoidal frequency component in the signal.</p>
+
+<p>The data is filtered to include only the dominant sinusodial frequency components. Usually, the complex magnitude can be used to find the phase and absolute magnitude of the sinusodial wave corresponding to each frequency. In this case, we are using a time difference variable so the magnitudes and phases are not representative of the actual variable.</p>
+
+<p>This process can be semi-automated by using statistics. The center frequency can be found by average across all frequencies. The bandwidth of the filter can be defined by frequencies within to standard deviations of the mean of the absolute complex magnitude. The purpose of this is avoid periods that are too large.</p>
+
+<pre style='color:#000000;background:#ffffff;'>N = <span style='color:#7f0055; font-weight:bold; '>len</span>(time_diff_signal)
+unfiltered  = DSP.get_frequency_domain(time_diff_signal)
+y_abs=( 2.0/N * np.<span style='color:#7f0055; font-weight:bold; '>abs</span>(unfiltered[1:,1]))
+
+center = np.mean(unfiltered[1:,0])
+band = 1*np.std(unfiltered[1:,0])
+threshold = np.mean(y_abs)+1*np.std(y_abs)
+
+<span style='color:#7f0055; font-weight:bold; '>print</span>(<span style='color:#2a00ff; '>"Center frequency: "</span>,np.<span style='color:#7f0055; font-weight:bold; '>abs</span>(center),<span style='color:#2a00ff; '>"Band: "</span>,np.absolute(band),<span style='color:#2a00ff; '>"Threshold: "</span>,threshold)
+
+plt.plot(unfiltered[1:,0],y_abs)
+plt.xlabel(<span style='color:#2a00ff; '>'frequency'</span>)
+plt.ylabel(<span style='color:#2a00ff; '>'absolute magnitude'</span>)
+plt.title(<span style='color:#2a00ff; '>"Absolute Magnitude of Complex Frequencies"</span>)
+plt.show()
+
+<span style='color:#7f0055; font-weight:bold; '>print</span>(<span style='color:#2a00ff; '>"Frequency, Magnitude"</span>)
+abs_filtered = np.absolute(DSP.filter_freq_domain(unfiltered, center,band,threshold))
+<span style='color:#7f0055; font-weight:bold; '>print</span>(abs_filtered)
+</pre>
+<!--Created using ToHtml.com on 2019-01-15 03:10:20 UTC -->
+
+<pre style='color:#000000;background:#ffffff;'>
+Center frequency:  0.249568221071 Band:  0.14358883867 Threshold:  408.870795735
+</pre>
+
+<p><img src='/ts_challenge_images/output_13_0.png' /></p>
+
+<pre style='color:#000000;background:#ffffff;'>
+Frequency, Magnitude
+[[  1.41623489e-01   1.33800535e+05]
+ [  1.43350604e-01   4.90313504e+05]
+ [  2.78065630e-01   1.31154698e+05]
+ [  2.81519862e-01   1.23147724e+05]
+ [  2.83246978e-01   2.54959357e+05]
+ [  2.84974093e-01   6.93085781e+05]
+ [  2.86701209e-01   5.95979105e+05]
+ [  2.88428325e-01   1.80149377e+05]
+ [  2.90155440e-01   1.44095857e+05]
+ [  2.91882556e-01   1.36036705e+05]]
+</pre>
+
+<p>Creating seasonal predictor variables</p>
+
+<p>After filtering the data, the dominant frequencies were found at .143, .28, and .29. These correspond to T=7,4, and 3, respectively. Sequences with these periods can be created.</p>
+
+<p>Notice that the frequency .428, that corresponds to a period of 2 (actually a little below), was not included in our predictors. This is because of Nyquist's thoeorm:</p>
+
+<p>"When the signal bandlimited to ? fs cycles/second (hertz), its Fourier transform, X(f), is 0 for all |f| > 1/2*(1/T)"</p>
+<p>In this case the signal has a sampling period of 1 or a sampling frequency of 1. The maximum frequency we can "see," by Nyquist's theorm, would be a signal with a period greater than 2.</p>
+
+<pre style='color:#000000;background:#ffffff;'>period_list = <span style='color:#7f0055; font-weight:bold; '>set</span>([<span style='color:#7f0055; font-weight:bold; '>round</span>(1/(ft)) <span style='color:#7f0055; font-weight:bold; '>for</span> ft,ht <span style='color:#7f0055; font-weight:bold; '>in</span> abs_filtered <span style='color:#7f0055; font-weight:bold; '>if</span> <span style='color:#7f0055; font-weight:bold; '>round</span>(1/(ft))>2])
+<span style='color:#7f0055; font-weight:bold; '>print</span>(<span style='color:#2a00ff; '>"Sequence list: "</span>,period_list)
+
+train = DSP.get_sequences(train,period_list,start_index=1,plot=True)
+valid = DSP.get_sequences(valid,period_list,start_index=<span style='color:#7f0055; font-weight:bold; '>len</span>(train)+1,plot=False)
+valid.head()
+</pre>
+<!--Created using ToHtml.com on 2019-01-15 03:12:28 UTC -->
+<pre style='color:#000000;background:#ffffff;'>
+Sequence list:  {3.0, 4.0, 7.0}
+</pre>
+
+<p><img src='/ts_challenge_images/output_15_2.png' /></p>
+<p><img src='/ts_challenge_images/output_15_3.png' /></p>
+<p><img src='/ts_challenge_images/output_15_4.png' /></p>
