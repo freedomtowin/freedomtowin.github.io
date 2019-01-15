@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Cloud computing & Parallel Programming with Jupyter notebooks"
+title:  "Parallel Programming on Remote Servers with Jupyter Notebook and ipyparallel"
 date: 2017-09-10 12:00:00
 author: Rohan Kotwani
 excerpt: ""
@@ -14,12 +14,11 @@ tags:
 
 1. Parallel Programming
 2. Remote Access
-3. PostgreSQL remote Access
 
 
 ## Introduction
 
-This post demostrates Jupyter notebook's capabilities to access remote servers for parallel programming, file management, and database management.
+This post demostrates Jupyter notebook's and ipyparallel's capabilities to access remote servers for parallel programming.
 
 
 
@@ -106,59 +105,3 @@ c[:].apply_sync(lambda : "Hello, World")
 1. jupyter notebook --no-browser --port=8889 --ip=127.0.0.1 (remote host)
 2. ssh -N -f -L 127.0.0.1:8889:127.0.0.1:8889 rohankotwani@probably-engine (local host)
 3. http://127.0.0.1:8889/tree (local host web browser)
-
-
-
-# Connect to Postgresql database remotely
-
-1. modify the following file: /etc/postgresql/9.5/main/postgresql.conf
-2. edit the following lines: listen_addresses = '*'
-    
-3. possibly modify the following file: /etc/postgresql/9.5/main/pg_hba.conf
-
-
-{% highlight python %}
-from sqlalchemy import create_engine
-import pandas.io.sql as psql
-connection_s='postgresql://username:password@ip-address:5432/mytestdb'
-engine = create_engine(connection_s, connect_args={'sslmode':'require'}, echo=False)
-psql.execute("CREATE TABLE AUG31 (first_column text,second_column integer);",engine) 
-{% endhighlight %}
-
-
-
-
-    <sqlalchemy.engine.result.ResultProxy at 0x109554208>
-
-
-
-
-{% highlight python %}
-import pandas as pd
-pd.read_sql('select * from AUG31', con=engine).head()
-{% endhighlight %}
-
-
-
-
-<div>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>first_column</th>
-      <th>second_column</th>
-    </tr>
-  </thead>
-  <tbody>
-  </tbody>
-</table>
-</div>
-
-
-
-
-{% highlight python %}
-
-{% endhighlight %}
-
