@@ -183,21 +183,21 @@ Regression.heapsort(heap)
 
 
 
-<pre style='color:#000000;background:#ffffff;'>
-[(2501666772.2010365, 2),
- (2699152210.1621375, 9),
- (2699503808.6114817, 14),
- (2701796858.0785437, 10),
- (2701846050.0146337, 13),
- (2702552306.8232799, 12),
- (2706108691.5368271, 11),
- (2990342895.3898125, 8),
- (4491840385.0665913, 1),
- (4868690323.6375523, 4),
- (5963871838.3020554, 3),
- (11208662852.721825, 5),
- (317581251234.68689, 7),
- (477442016671.72321, 6)]
+<pre>
+    [(2501666772.2010365, 2),
+     (2699152210.1621375, 9),
+     (2699503808.6114817, 14),
+     (2701796858.0785437, 10),
+     (2701846050.0146337, 13),
+     (2702552306.8232799, 12),
+     (2706108691.5368271, 11),
+     (2990342895.3898125, 8),
+     (4491840385.0665913, 1),
+     (4868690323.6375523, 4),
+     (5963871838.3020554, 3),
+     (11208662852.721825, 5),
+     (317581251234.68689, 7),
+     (477442016671.72321, 6)]
  </pre>
 
 <pre style='color:#000000;background:#ffffff;'>T_train = Regression.pandas_poly_feature(train[[<span style='color:#2a00ff; '>'index'</span>]],2)
@@ -249,24 +249,24 @@ abs_filtered = np.absolute(DSP.filter_freq_domain(unfiltered, center,band,thresh
 </pre>
 <!--Created using ToHtml.com on 2019-01-15 03:10:20 UTC -->
 
-<pre style='color:#000000;background:#ffffff;'>
+<pre>
 Center frequency:  0.249568221071 Band:  0.14358883867 Threshold:  408.870795735
 </pre>
 
 <p><img src='/ts_challenge_images/output_13_2.png' /></p>
 
-<pre style='color:#000000;background:#ffffff;'>
-Frequency, Magnitude
-[[  1.41623489e-01   1.33800535e+05]
- [  1.43350604e-01   4.90313504e+05]
- [  2.78065630e-01   1.31154698e+05]
- [  2.81519862e-01   1.23147724e+05]
- [  2.83246978e-01   2.54959357e+05]
- [  2.84974093e-01   6.93085781e+05]
- [  2.86701209e-01   5.95979105e+05]
- [  2.88428325e-01   1.80149377e+05]
- [  2.90155440e-01   1.44095857e+05]
- [  2.91882556e-01   1.36036705e+05]]
+<pre>
+    Frequency, Magnitude
+    [[  1.41623489e-01   1.33800535e+05]
+     [  1.43350604e-01   4.90313504e+05]
+     [  2.78065630e-01   1.31154698e+05]
+     [  2.81519862e-01   1.23147724e+05]
+     [  2.83246978e-01   2.54959357e+05]
+     [  2.84974093e-01   6.93085781e+05]
+     [  2.86701209e-01   5.95979105e+05]
+     [  2.88428325e-01   1.80149377e+05]
+     [  2.90155440e-01   1.44095857e+05]
+     [  2.91882556e-01   1.36036705e+05]]
 </pre>
 
 <p>Creating seasonal predictor variables</p>
@@ -627,6 +627,11 @@ plt.show()
     Baseline:  8530795814.65
     </pre>
     
+
+<p><img src='/ts_challenge_images/output_23_1.png' /></p>
+
+<p><img src='/ts_challenge_images/output_23_2.png' /></p>
+
 <pre>
     coefficients:
     [[  1.15385953e+04]
@@ -645,3 +650,77 @@ plt.show()
     R^2:  0.522015040734
     Baseline:  2424981317.62
 </pre>
+
+<p><img src='/ts_challenge_images/output_23_4.png' /></p>
+
+<p><img src='/ts_challenge_images/output_23_5.png' /></p>
+
+
+<p>The regression model on the training dataset had an R-Squared value of 0.78 with 9 predictor variables. The residual are evenly distributed around zero with a two large outliers.</p>
+<p>The validation dataset had an R-Squared of 0.52. The validation dataset residuals have many outliers compared the the training dataset residuals. In addition, there is a slight downward trend which suggests that a variable might be left out of the model.</p>
+
+<pre style='color:#000000;background:#ffffff;'>y=train[[<span style='color:#2a00ff; '>'Pageviews'</span>]].values
+
+x=np.column_stack((S_train,T_train))
+
+
+A=x.T.dot(x)
+b=x.T.dot(y)
+z = np.linalg.solve(A,b)
+
+SSE=np.<span style='color:#7f0055; font-weight:bold; '>sum</span>((y-x.dot(z))**2)
+<span style='color:#7f0055; font-weight:bold; '>print</span>(<span style='color:#2a00ff; '>"SSE :"</span>,SSE)
+<span style='color:#7f0055; font-weight:bold; '>print</span>(<span style='color:#2a00ff; '>"Baseline: "</span>,<span style='color:#7f0055; font-weight:bold; '>sum</span>((y-np.mean(y))**2))
+
+
+SSE=np.<span style='color:#7f0055; font-weight:bold; '>sum</span>((y-x.dot(z))**2)
+SST=<span style='color:#7f0055; font-weight:bold; '>sum</span>((y-np.mean(y))**2)[0]
+<span style='color:#7f0055; font-weight:bold; '>print</span>(<span style='color:#2a00ff; '>"SSE: "</span>,SSE)
+<span style='color:#7f0055; font-weight:bold; '>print</span>(<span style='color:#2a00ff; '>"SST: "</span>,SST)
+<span style='color:#7f0055; font-weight:bold; '>print</span>(<span style='color:#2a00ff; '>"R^2: "</span>,1-SSE/SST)
+
+
+plt.plot(train[<span style='color:#2a00ff; '>'index'</span>],y,<span style='color:#2a00ff; '>'.'</span>)
+plt.plot(train[<span style='color:#2a00ff; '>'index'</span>],x.dot(z),<span style='color:#2a00ff; '>'-'</span>)
+plt.title(<span style='color:#2a00ff; '>"Seasonally predicted Values over time: Training"</span>)
+plt.show()
+
+plt.scatter(train[<span style='color:#2a00ff; '>'index'</span>],y-x.dot(z))
+plt.title(<span style='color:#2a00ff; '>"Residuals"</span>)
+plt.show()
+
+
+<span style='color:#7f0055; font-weight:bold; '>print</span>(z)
+<span style='color:#7f0055; font-weight:bold; '>print</span>()
+
+
+output=valid[[<span style='color:#2a00ff; '>'Pageviews'</span>]]
+y=output.values
+
+
+x=np.column_stack((S_valid,T_valid))
+
+SSE=np.<span style='color:#7f0055; font-weight:bold; '>sum</span>((y-x.dot(z))**2)
+SST=<span style='color:#7f0055; font-weight:bold; '>sum</span>((y-np.mean(y))**2)[0]
+
+<span style='color:#7f0055; font-weight:bold; '>print</span>(<span style='color:#2a00ff; '>"SSE: "</span>,SSE)
+<span style='color:#7f0055; font-weight:bold; '>print</span>(<span style='color:#2a00ff; '>"SST: "</span>,SST)
+<span style='color:#7f0055; font-weight:bold; '>print</span>(<span style='color:#2a00ff; '>"R^2: "</span>,1-SSE/SST)
+<span style='color:#7f0055; font-weight:bold; '>print</span>(<span style='color:#2a00ff; '>"Baseline: "</span>,<span style='color:#7f0055; font-weight:bold; '>sum</span>((y-np.mean(y))**2)[0])
+
+plt.plot(valid[<span style='color:#2a00ff; '>'index'</span>],y,<span style='color:#2a00ff; '>'.'</span>)
+plt.plot(valid[<span style='color:#2a00ff; '>'index'</span>],x.dot(z),<span style='color:#2a00ff; '>'-'</span>)
+plt.title(<span style='color:#2a00ff; '>"Seasonally predicted Values over time"</span>)
+plt.show()
+plt.scatter(valid[<span style='color:#2a00ff; '>'index'</span>],y-x.dot(z))
+plt.title(<span style='color:#2a00ff; '>"Residuals"</span>)
+plt.show()
+</pre>
+<!--Created using ToHtml.com on 2019-01-15 03:20:55 UTC -->
+
+<p>Results</p>
+<p>The regression model on the training dataset had an R-Squared value of 0.78 with 9 predictor variables. The residual are evenly distributed around zero with a two large outliers. </p>
+<p>The validation dataset had an R-Squared of 0.52. The validation dataset residuals have many outliers compared the the training dataset residuals. In addition, there is a slight downward trend which suggests that a variable might be left out of the model.</p>
+<p>The results are almost (if not) exactly the same, so which method to choose?</p>
+<p>Dummy coding can be automated, but its not always easy to type every variable to include in a linear model. In addition, it requires some inpection and trail and error to find the seasonal variable. The advantage of dummy coding is that each level is accounted for and it relatively easy to compare levels.</p>
+<p>Signal processing can be used to create seasonal components almost automatically, but it is more computational expensive to calculate. In addition, it is not clear from the coefficients what the seasonal components are. The advantage is that there can be more predictive variables in the model, and the number of sinusodial components can be increased or decreased by adjusting the threshold or bandwith. </p>
