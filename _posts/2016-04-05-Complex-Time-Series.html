@@ -485,7 +485,7 @@ plt.show()
     frequencies  [[  0.00000000e+00   8.70000000e+02]
      [  2.50000000e-01   4.10121933e+02]]</pre>
      
-<p><img src='/ts_challenge_images/output_18_6.png' /></p>
+<p><img src='/ts_challenge_images/output_18_4.png' /></p>
      
 <pre>      
     frequencies used in  seq_4.0  :  [0.25]
@@ -497,4 +497,151 @@ plt.show()
      [  4.27586207e-01   1.61660579e+02]
      [  4.29310345e-01   2.15278734e+02]]</pre>
      
+<p><img src='/ts_challenge_images/output_18_6.png' /></p>
+
+<pre>    
+    frequencies used in  seq_7.0  :  [0.14285714285714285, 0.5, 0.33333333333333331]
+    frequencies used in  seq_7.0  :  [0.14285714285714285, 0.5, 0.33333333333333331]
+</pre>
+
 <p><img src='/ts_challenge_images/output_18_8.png' /></p>
+
+<pre>   
+    SSE : 5765825922.99
+    Baseline:  8530795814.65</pre>
+    
+<p><img src='/ts_challenge_images/output_18_10.png' /></p>
+
+<pre>    
+        coefficients: 
+    [[  1.06306549e+04]
+     [ -1.63450638e+00]
+     [  5.94252422e+01]
+     [ -6.20595993e+01]
+     [ -3.09144366e+00]
+     [  1.29084218e+03]
+     [ -5.98934835e+18]
+     [ -2.34003768e+03]
+     [  1.42249877e+03]
+     [ -1.72123723e+03]
+     [  1.13494916e+03]]</pre>
+     
+     
+<p>Weighted Addition of Seasonal Components</p>
+<p>In the regression model, each of these components will get a weight associated with it which can be added together to create a weighted seasonal component. The weighted seasonal component has a pattern similar to that of the Pageviews. </p>
+<p>Seasonal Predictors</p>
+<p>There are 3 saw tooth sequences included in the model each with a unique t, time index. A saw tooth of period 3 & 4 have only two sinusoids with with periods 0.33 & 0.25, respectively. Finally, a saw tooth wave of period 7 is used inside of 6 sinusoids with periods 0.1428, 0.333, and 0.5.</p>
+<p>These periods can be found using the same semi-automated techniques used to generate the sequences as described earlier. The threshold can be adjust by the number of standard deviations from the mean of the absolute complex magnitude.</p>
+<p>Finding peaks</p>
+<p>There are two peaks which correspond to Monday and Thursday. This is consistent with the problem solution given above.</p>
+
+
+<pre style='color:#000000;background:#ffffff;'>peaks=[]
+<span style='color:#7f0055; font-weight:bold; '>for</span> i,xz <span style='color:#7f0055; font-weight:bold; '>in</span> <span style='color:#7f0055; font-weight:bold; '>enumerate</span>(x.dot(z)):
+    <span style='color:#7f0055; font-weight:bold; '>if</span> i>0 <span style='color:#7f0055; font-weight:bold; '>and</span> i&lt;<span style='color:#7f0055; font-weight:bold; '>len</span>(x.dot(z))-1:
+        <span style='color:#7f0055; font-weight:bold; '>if</span> x.dot(z)[i]>x.dot(z)[i-1] <span style='color:#7f0055; font-weight:bold; '>and</span> x.dot(z)[i]>x.dot(z)[i+1]:
+            peaks.append(train[<span style='color:#2a00ff; '>'time'</span>][i].isocalendar()[2])
+<span style='color:#7f0055; font-weight:bold; '>print</span>(<span style='color:#7f0055; font-weight:bold; '>set</span>(peaks))
+</pre>
+<!--Created using ToHtml.com on 2019-01-15 03:18:58 UTC -->
+
+<pre>
+    {1, 4}
+</pre>
+
+<p>Training & Validation</p>
+<p>The following models will be trained and validated with different seasonal variables:</p>
+<p>1. Model fitted with a dummy coded weekday variable</p>
+<p>2. Model fitted with extracted sinusodial components</p>
+
+
+<pre style='color:#000000;background:#ffffff;'>y=train[[<span style='color:#2a00ff; '>'Pageviews'</span>]].values
+
+m =<span style='color:#7f0055; font-weight:bold; '>len</span>(train)
+
+x=np.ones((m,9))
+x[:,1:]=np.column_stack((train[<span style='color:#2a00ff; '>'W_2'</span>],train[<span style='color:#2a00ff; '>'W_3'</span>],
+                         train[<span style='color:#2a00ff; '>'W_4'</span>],train[<span style='color:#2a00ff; '>'W_5'</span>],train[<span style='color:#2a00ff; '>'W_6'</span>],
+                         train[<span style='color:#2a00ff; '>'W_7'</span>],T_train))
+
+
+A=x.T.dot(x)
+b=x.T.dot(y)
+z = np.linalg.solve(A,b)
+
+SSE=np.<span style='color:#7f0055; font-weight:bold; '>sum</span>((y-x.dot(z))**2)
+SST=<span style='color:#7f0055; font-weight:bold; '>sum</span>((y-np.mean(y))**2)[0]
+<span style='color:#7f0055; font-weight:bold; '>print</span>(<span style='color:#2a00ff; '>"Training"</span>)
+<span style='color:#7f0055; font-weight:bold; '>print</span>(<span style='color:#2a00ff; '>"SSE: "</span>,SSE)
+<span style='color:#7f0055; font-weight:bold; '>print</span>(<span style='color:#2a00ff; '>"SST: "</span>,SST)
+<span style='color:#7f0055; font-weight:bold; '>print</span>(<span style='color:#2a00ff; '>"R^2: "</span>,1-SSE/SST)
+<span style='color:#7f0055; font-weight:bold; '>print</span>(<span style='color:#2a00ff; '>"Baseline: "</span>,<span style='color:#7f0055; font-weight:bold; '>sum</span>((y-np.mean(y))**2)[0])
+
+plt.plot(train[<span style='color:#2a00ff; '>'index'</span>],y,<span style='color:#2a00ff; '>'.'</span>)
+plt.plot(train[<span style='color:#2a00ff; '>'index'</span>],x.dot(z),<span style='color:#2a00ff; '>'-'</span>)
+plt.title(<span style='color:#2a00ff; '>"Dummy coded weekday variable: Training"</span>)
+plt.show()
+
+plt.scatter(train[<span style='color:#2a00ff; '>'index'</span>],y-x.dot(z))
+plt.title(<span style='color:#2a00ff; '>"Residuals"</span>)
+plt.show()
+<span style='color:#7f0055; font-weight:bold; '>print</span>(<span style='color:#2a00ff; '>"coefficients:"</span>)
+<span style='color:#7f0055; font-weight:bold; '>print</span>(z)
+<span style='color:#7f0055; font-weight:bold; '>print</span>()
+
+y=valid[[<span style='color:#2a00ff; '>'Pageviews'</span>]].values
+
+m =<span style='color:#7f0055; font-weight:bold; '>len</span>(valid)
+
+x=np.ones((m,9))
+x[:,1:]=np.column_stack((valid[<span style='color:#2a00ff; '>'W_2'</span>],valid[<span style='color:#2a00ff; '>'W_3'</span>],
+                         valid[<span style='color:#2a00ff; '>'W_4'</span>],valid[<span style='color:#2a00ff; '>'W_5'</span>],valid[<span style='color:#2a00ff; '>'W_6'</span>],
+                         valid[<span style='color:#2a00ff; '>'W_7'</span>],T_valid))
+
+
+
+SSE=np.<span style='color:#7f0055; font-weight:bold; '>sum</span>((y-x.dot(z))**2)
+SST=<span style='color:#7f0055; font-weight:bold; '>sum</span>((y-np.mean(y))**2)[0]
+<span style='color:#7f0055; font-weight:bold; '>print</span>(<span style='color:#2a00ff; '>"Validation"</span>)
+<span style='color:#7f0055; font-weight:bold; '>print</span>(<span style='color:#2a00ff; '>"SSE: "</span>,SSE)
+<span style='color:#7f0055; font-weight:bold; '>print</span>(<span style='color:#2a00ff; '>"SST: "</span>,SST)
+<span style='color:#7f0055; font-weight:bold; '>print</span>(<span style='color:#2a00ff; '>"R^2: "</span>,1-SSE/SST)
+<span style='color:#7f0055; font-weight:bold; '>print</span>(<span style='color:#2a00ff; '>"Baseline: "</span>,<span style='color:#7f0055; font-weight:bold; '>sum</span>((y-np.mean(y))**2)[0])
+
+plt.plot(valid[<span style='color:#2a00ff; '>'index'</span>],valid[[<span style='color:#2a00ff; '>'Pageviews'</span>]],<span style='color:#2a00ff; '>'.'</span>)
+plt.plot(valid[<span style='color:#2a00ff; '>'index'</span>],x.dot(z),<span style='color:#2a00ff; '>'-'</span>)
+plt.title(<span style='color:#2a00ff; '>"Dummy coded weekday variable: Validation"</span>)
+plt.show()
+
+plt.scatter(valid[<span style='color:#2a00ff; '>'index'</span>],y-x.dot(z))
+plt.title(<span style='color:#2a00ff; '>"Residuals"</span>)
+plt.show()
+</pre>
+<!--Created using ToHtml.com on 2019-01-15 03:19:45 UTC -->
+
+<pre>
+    Training
+    SSE:  1912154025.09
+    SST:  8530795814.65
+    R^2:  0.775852796546
+    Baseline:  8530795814.65
+    </pre>
+    
+<pre>
+    coefficients:
+    [[  1.15385953e+04]
+     [ -2.79933336e+03]
+     [ -3.32862564e+03]
+     [ -1.48611482e+03]
+     [ -3.71268360e+03]
+     [ -6.88505486e+03]
+     [ -5.73875872e+03]
+     [ -1.29164524e+00]
+     [  2.77465319e-02]]
+    
+    Validation
+    SSE:  1159104596.32
+    SST:  2424981317.62
+    R^2:  0.522015040734
+    Baseline:  2424981317.62
+</pre>
