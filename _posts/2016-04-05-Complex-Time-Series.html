@@ -169,7 +169,7 @@ valid = pd.concat([valid, weekday_dummies], axis=1)
 import Regression
 import DSP</pre>
 
-<p>Finding the overall trend:</p>
+<h3>Finding the overall trend:</h3>
 
 <p>A polynomial term can be used to represent the trend component T(t) which can be created from the index variable. The complexity of the trend component can be tuned by using a training and validation set to find optimal complexity with the lowest sum of squared errors. A complexity of degree 2 had the lowest SSE value on the validation set so these terms will be included in the model.</p>
 
@@ -204,7 +204,7 @@ Regression.heapsort(heap)
 T_valid = Regression.pandas_poly_feature(valid[[<span style='color:#2a00ff; '>'index'</span>]],2)
 </pre>
 
-<p>Removing the overall trend:</p>
+<h3>Removing the overall trend:</h3>
 
 <p>First, the overall trend needs to be removed from the signal in order to statisfy the stationary process assumption. This can be accomplished by creating a lag 1 differenced variable for Pageviews. This differenced variable will also make seasonal components easier to find.</p>
 
@@ -219,7 +219,7 @@ plt.show()
 
 <p><img src='/ts_challenge_images/output_11_0.png' /></p>
 
-<p>The FFT transformation:</p>
+<h3>The FFT transformation:</h3>
 
 <p>Taking the FFT of the time differenced signal creates a complex magnitude representation for each sinusoidal frequency component in the signal.</p>
 
@@ -269,7 +269,7 @@ Center frequency:  0.249568221071 Band:  0.14358883867 Threshold:  408.870795735
      [  2.91882556e-01   1.36036705e+05]]
 </pre>
 
-<p>Creating seasonal predictor variables</p>
+<h3>Creating seasonal predictor variables</h3>
 
 <p>After filtering the data, the dominant frequencies were found at .143, .28, and .29. These correspond to T=7,4, and 3, respectively. Sequences with these periods can be created.</p>
 
@@ -414,7 +414,9 @@ Sequence list:  {3.0, 4.0, 7.0}
 
 <p>Eureka! Weekday (Sequence period = 7) shares the same frequency components as Pageviews!</p>
 <p>The table below shows the index and weekday to help illustrate what the periods or cycles. The index starts at 1, but this corresponds to weekday 3 (or Wednesday). So index 6 corresponds to Monday and index 2 corresponds to Thursday.</p>
-<p>Fitting the Model</p>
+
+<h3>Fitting the Model</h3>
+
 <p>Since T(t) is already created, this part of the blog will focus on S(t).</p>
 <p>Each generated sequence will be made into pairs of seasonable components and will have at least two components, two sinusoidal waves, i.e. ?1sin(t/T) + ?2cos(t/T). In fact, the sum of weighted cosine & sine terms for each dominant frequency in the signal can be thought of as a Fourier Series. The difference is that the ? valus will only be estimated for the most dominant frequenciesinstead of an infinite, or large number of periodic waves.</p>
 <p>Fourier series formula</p>
@@ -527,12 +529,12 @@ plt.show()
      [  1.13494916e+03]]</pre>
      
      
-<p>Weighted Addition of Seasonal Components</p>
+<h3>Weighted Addition of Seasonal Components</h3>
 <p>In the regression model, each of these components will get a weight associated with it which can be added together to create a weighted seasonal component. The weighted seasonal component has a pattern similar to that of the Pageviews. </p>
-<p>Seasonal Predictors</p>
+<h3>Seasonal Predictors</h3>
 <p>There are 3 saw tooth sequences included in the model each with a unique t, time index. A saw tooth of period 3 & 4 have only two sinusoids with with periods 0.33 & 0.25, respectively. Finally, a saw tooth wave of period 7 is used inside of 6 sinusoids with periods 0.1428, 0.333, and 0.5.</p>
 <p>These periods can be found using the same semi-automated techniques used to generate the sequences as described earlier. The threshold can be adjust by the number of standard deviations from the mean of the absolute complex magnitude.</p>
-<p>Finding peaks</p>
+<h3>Finding peaks</h3>
 <p>There are two peaks which correspond to Monday and Thursday. This is consistent with the problem solution given above.</p>
 
 
@@ -549,7 +551,7 @@ plt.show()
     {1, 4}
 </pre>
 
-<p>Training & Validation</p>
+<h3>Training & Validation</h3>
 <p>The following models will be trained and validated with different seasonal variables:</p>
 <p>1. Model fitted with a dummy coded weekday variable</p>
 <p>2. Model fitted with extracted sinusodial components</p>
@@ -755,7 +757,7 @@ plt.show()
     Baseline:  2424981317.62
 </pre>
 
-<p>Results</p>
+<h3>Results</h3>
 <p>The regression model on the training dataset had an R-Squared value of 0.78 with 9 predictor variables. The residual are evenly distributed around zero with a two large outliers. </p>
 <p>The validation dataset had an R-Squared of 0.52. The validation dataset residuals have many outliers compared the the training dataset residuals. In addition, there is a slight downward trend which suggests that a variable might be left out of the model.</p>
 <p>The results are almost (if not) exactly the same, so which method to choose?</p>
