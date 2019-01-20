@@ -10,19 +10,19 @@ tags:
 
 ---
 
-## Table of Contents
+### Table of Contents
 
 1. Setting up remote engines
 2. Starting remote engines
 
 
-## Introduction
+### Introduction
 
 This post demostrates Jupyter notebook's and ipyparallel's capabilities to access remote servers for parallel programming.
 
 
 
-### My ipcluster_config.py file has the following:
+#### My ipcluster_config.py file has the following:
     
     c.IPClusterEngines.engine_launcher = \
     'IPython.parallel.apps.launcher.SSHEngineSetLauncher'
@@ -32,7 +32,7 @@ This post demostrates Jupyter notebook's and ipyparallel's capabilities to acces
         'host@xxx.xxx.xxx.x02' : (2, ['--profile_dir=/home/to/profile'])
         }
         
-### My ipcontroller_config.py file has the following:
+#### My ipcontroller_config.py file has the following:
 
     c.HubFactory.ip = '*'
     
@@ -100,7 +100,7 @@ c[:].apply_sync(lambda : "Hello, World")
 
 
 
-# Steps to connect remotely to jupyter notebook
+### Steps to connect remotely to jupyter notebook
 
 1. jupyter notebook --no-browser --port=8889 --ip=127.0.0.1 (remote host)
 2. ssh -N -f -L 127.0.0.1:8889:127.0.0.1:8889 rohankotwani@probably-engine (local host)
