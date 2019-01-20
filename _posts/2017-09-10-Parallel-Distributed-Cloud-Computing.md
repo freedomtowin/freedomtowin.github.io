@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Parallel Programming on Remote Servers with Jupyter Notebook and ipyparallel"
+title:  "Parallel Programming on Remote Servers with Ipyparallel"
 date: 2017-09-10 12:00:00
 author: Rohan Kotwani
 excerpt: ""
@@ -12,8 +12,8 @@ tags:
 
 ## Table of Contents
 
-1. Parallel Programming
-2. Remote Access
+1. Setting up remote engines
+2. Starting remote engines
 
 
 ## Introduction
