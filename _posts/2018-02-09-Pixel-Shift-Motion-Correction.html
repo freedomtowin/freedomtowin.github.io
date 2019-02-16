@@ -31,128 +31,13 @@ Real-Time Motion Correction— Pixel Shift — iOS
 
 <p>The real-time motion correction was achieved by using an <a href="https://en.wikipedia.org/wiki/Exponential_smoothing" data-href="https://en.wikipedia.org/wiki/Exponential_smoothing" class="markup--anchor markup--p-anchor" rel="noopener nofollow" target="_blank">exponential average</a> between the current and previous shift corrections. A 90% weight was assigned to the current frames pixel shift correction in the exponential average. Motion correction relative to a reference frame was achieved by accumulating pixel shifts. For example, moving the camera to the left should accumulate positive y shifts and moving the camera back to the original position should decrease the y shifts back to 0. Please note that horizontal motion corresponds with a y shift because it shifts the columns of the image.</p>
 
+
 <h3>Calculating the Pixel Shift from Phase Correlation</h3>
 
 <p>The maximum normalized correlation between two arrays, i.e., A and B, can be found by converting the matrices into the Fourier domain. The two matrices can be converted into the Fourier domain using a Fast Fourier transform, or FFT. Correlation between these matrices can be computed in this domain by multiplying matrix A and the conjugation of matrix B. The phase correlation can be found by dividing this result by the absolute magnitude of the Fourier domain correlation matrix. Finally, the matrix is converted back to the regular domain with an inverse Fast Fourier transform, IFFT. Finally, a FFT shift operation is applied to the result. The location of maximum phase correlation in the pixel domain can be used to infer the optimal pixel shift between the two matrices.</p>
 
-    <div id="gist94142102" class="gist">
-        <div class="gist-file">
-            <div class="gist-data">
-                <div class="js-gist-file-update-container js-task-list-container file-box">
-                    <div id="file-phasecorr-example-py" class="file">
-                        
-                        
-                        <div itemprop="text" class="blob-wrapper data type-python ">
-                            
-                            <table class="highlight tab-size js-file-line-container" data-tab-size="8">
-                                <tbody><tr>
-                                    <td id="file-phasecorr-example-py-L1" class="blob-num js-line-number" data-line-number="1"></td>
-                                    <td id="file-phasecorr-example-py-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">def</span> <span class="pl-en">phaseCorr</span>(<span class="pl-smi">a</span>, <span class="pl-smi">b</span>):</td>
-                                </tr>
-                                <tr>
-                                    <td id="file-phasecorr-example-py-L2" class="blob-num js-line-number" data-line-number="2"></td>
-                                    <td id="file-phasecorr-example-py-LC2" class="blob-code blob-code-inner js-file-line">    corr <span class="pl-k">=</span> np.fft.fftn(a)<span class="pl-k">*</span>np.conjugate(np.fft.fftn(b))</td>
-                                </tr>
-                                <tr>
-                                    <td id="file-phasecorr-example-py-L3" class="blob-num js-line-number" data-line-number="3"></td>
-                                    <td id="file-phasecorr-example-py-LC3" class="blob-code blob-code-inner js-file-line">    pc <span class="pl-k">=</span> corr<span class="pl-k">/</span>np.absolute(corr)</td>
-                                </tr>
-                                <tr>
-                                    <td id="file-phasecorr-example-py-L4" class="blob-num js-line-number" data-line-number="4"></td>
-                                    <td id="file-phasecorr-example-py-LC4" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">return</span> np.fft.fftshift(np.fft.ifftn(pc)).real</td>
-                                </tr>
-                                <tr>
-                                    <td id="file-phasecorr-example-py-L5" class="blob-num js-line-number" data-line-number="5"></td>
-                                    <td id="file-phasecorr-example-py-LC5" class="blob-code blob-code-inner js-file-line">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td id="file-phasecorr-example-py-L6" class="blob-num js-line-number" data-line-number="6"></td>
-                                    <td id="file-phasecorr-example-py-LC6" class="blob-code blob-code-inner js-file-line">a <span class="pl-k">=</span> np.array([[<span class="pl-c1">0</span>,<span class="pl-c1">0</span>,<span class="pl-c1">0</span>,<span class="pl-c1">0</span>],[<span class="pl-c1">0</span>,<span class="pl-c1">1</span>,<span class="pl-c1">0</span>,<span class="pl-c1">0</span>],[<span class="pl-c1">0</span>,<span class="pl-c1">0</span>,<span class="pl-c1">0</span>,<span class="pl-c1">0</span>],[<span class="pl-c1">0</span>,<span class="pl-c1">0</span>,<span class="pl-c1">0</span>,<span class="pl-c1">0</span>]])</td>
-                                </tr>
-                                <tr>
-                                    <td id="file-phasecorr-example-py-L7" class="blob-num js-line-number" data-line-number="7"></td>
-                                    <td id="file-phasecorr-example-py-LC7" class="blob-code blob-code-inner js-file-line">b <span class="pl-k">=</span> np.array([[<span class="pl-c1">0</span>,<span class="pl-c1">0</span>,<span class="pl-c1">0</span>,<span class="pl-c1">0</span>],[<span class="pl-c1">0</span>,<span class="pl-c1">0</span>,<span class="pl-c1">0</span>,<span class="pl-c1">0</span>],[<span class="pl-c1">0</span>,<span class="pl-c1">0</span>,<span class="pl-c1">0</span>,<span class="pl-c1">0</span>],[<span class="pl-c1">0</span>,<span class="pl-c1">0</span>,<span class="pl-c1">1</span>,<span class="pl-c1">0</span>]])</td>
-                                </tr>
-                                <tr>
-                                    <td id="file-phasecorr-example-py-L8" class="blob-num js-line-number" data-line-number="8"></td>
-                                    <td id="file-phasecorr-example-py-LC8" class="blob-code blob-code-inner js-file-line">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td id="file-phasecorr-example-py-L9" class="blob-num js-line-number" data-line-number="9"></td>
-                                    <td id="file-phasecorr-example-py-LC9" class="blob-code blob-code-inner js-file-line">center_x <span class="pl-k">=</span> a.shape[<span class="pl-c1">0</span>]<span class="pl-k">/</span><span class="pl-c1">2</span></td>
-                                </tr>
-                                <tr>
-                                    <td id="file-phasecorr-example-py-L10" class="blob-num js-line-number" data-line-number="10"></td>
-                                    <td id="file-phasecorr-example-py-LC10" class="blob-code blob-code-inner js-file-line">center_y <span class="pl-k">=</span> a.shape[<span class="pl-c1">1</span>]<span class="pl-k">/</span><span class="pl-c1">2</span></td>
-                                </tr>
-                                <tr>
-                                    <td id="file-phasecorr-example-py-L11" class="blob-num js-line-number" data-line-number="11"></td>
-                                    <td id="file-phasecorr-example-py-LC11" class="blob-code blob-code-inner js-file-line">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td id="file-phasecorr-example-py-L12" class="blob-num js-line-number" data-line-number="12"></td>
-                                    <td id="file-phasecorr-example-py-LC12" class="blob-code blob-code-inner js-file-line">corr <span class="pl-k">=</span> phaseCorr(a,b)</td>
-                                </tr>
-                                <tr>
-                                    <td id="file-phasecorr-example-py-L13" class="blob-num js-line-number" data-line-number="13"></td>
-                                    <td id="file-phasecorr-example-py-LC13" class="blob-code blob-code-inner js-file-line">x,y <span class="pl-k">=</span> np.where(corr<span class="pl-k">==</span>np.max(corr))</td>
-                                </tr>
-                                <tr>
-                                    <td id="file-phasecorr-example-py-L14" class="blob-num js-line-number" data-line-number="14"></td>
-                                    <td id="file-phasecorr-example-py-LC14" class="blob-code blob-code-inner js-file-line">x,y <span class="pl-k">=</span> x[<span class="pl-c1">0</span>],y[<span class="pl-c1">0</span>]</td>
-                                </tr>
-                                <tr>
-                                    <td id="file-phasecorr-example-py-L15" class="blob-num js-line-number" data-line-number="15"></td>
-                                    <td id="file-phasecorr-example-py-LC15" class="blob-code blob-code-inner js-file-line">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td id="file-phasecorr-example-py-L16" class="blob-num js-line-number" data-line-number="16"></td>
-                                    <td id="file-phasecorr-example-py-LC16" class="blob-code blob-code-inner js-file-line"><span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">'</span>a:<span class="pl-pds">'</span></span>)</td>
-                                </tr>
-                                <tr>
-                                    <td id="file-phasecorr-example-py-L17" class="blob-num js-line-number" data-line-number="17"></td>
-                                    <td id="file-phasecorr-example-py-LC17" class="blob-code blob-code-inner js-file-line"><span class="pl-c1">print</span>(a)</td>
-                                </tr>
-                                <tr>
-                                    <td id="file-phasecorr-example-py-L18" class="blob-num js-line-number" data-line-number="18"></td>
-                                    <td id="file-phasecorr-example-py-LC18" class="blob-code blob-code-inner js-file-line"><span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">'</span>b:<span class="pl-pds">'</span></span>)</td>
-                                </tr>
-                                <tr>
-                                    <td id="file-phasecorr-example-py-L19" class="blob-num js-line-number" data-line-number="19"></td>
-                                    <td id="file-phasecorr-example-py-LC19" class="blob-code blob-code-inner js-file-line"><span class="pl-c1">print</span>(b)</td>
-                                </tr>
-                                <tr>
-                                    <td id="file-phasecorr-example-py-L20" class="blob-num js-line-number" data-line-number="20"></td>
-                                    <td id="file-phasecorr-example-py-LC20" class="blob-code blob-code-inner js-file-line"><span class="pl-c1">print</span>()</td>
-                                </tr>
-                                <tr>
-                                    <td id="file-phasecorr-example-py-L21" class="blob-num js-line-number" data-line-number="21"></td>
-                                    <td id="file-phasecorr-example-py-LC21" class="blob-code blob-code-inner js-file-line"><span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">'</span>phase shift of `a` relative to `b`<span class="pl-pds">'</span></span>)</td>
-                                </tr>
-                                <tr>
-                                    <td id="file-phasecorr-example-py-L22" class="blob-num js-line-number" data-line-number="22"></td>
-                                    <td id="file-phasecorr-example-py-LC22" class="blob-code blob-code-inner js-file-line"><span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">'</span>x shift:<span class="pl-pds">'</span></span>,center_x<span class="pl-k">-</span>x,<span class="pl-s"><span class="pl-pds">'</span>y shift:<span class="pl-pds">'</span></span>,center_y<span class="pl-k">-</span>y)</td>
-                                </tr>
-                                </tbody></table>
-                            
-                            
-                        </div>
-                        
-                    </div>
-                </div>
-                
-            </div>
-            <div class="gist-meta">
-                <a href="https://gist.github.com/Freedomtowin/7b8b5b6fde0ad2c9ffe1e67bb23a9e0b/raw/dec390b3f5fee6fcf13a60b7b93b580c2205d1c8/phaseCorr-example.py" style="float:right">view raw</a>
-                <a href="https://gist.github.com/Freedomtowin/7b8b5b6fde0ad2c9ffe1e67bb23a9e0b#file-phasecorr-example-py">phaseCorr-example.py</a>
-                hosted with ❤ by <a href="https://github.com">GitHub</a>
-            </div>
-        </div>
-    </div>
+
+    <script src="https://gist.github.com/Freedomtowin/7b8b5b6fde0ad2c9ffe1e67bb23a9e0b.js"></script>
 
     <pre name="95bc" id="95bc" class="graf graf--pre graf-after--figure">a:<br>[[0 0 0 0]<br> [0 1 0 0]<br> [0 0 0 0]<br> [0 0 0 0]]<br>b:<br>[[0 0 0 0]<br> [0 0 0 0]<br> [0 0 0 0]<br> [0 0 1 0]]</pre>
 
