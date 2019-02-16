@@ -26,7 +26,7 @@ tags:
     Most data scientist working with B2B or B2C time series are primarily working with non-continuous, or discrete, processes. Discrete means that the data are collected at fixed time intervals. If a time series has a recurring pattern, then the time series can be said to be periodic. The distiction between continuous and discrete is important because there is a granularity time limit to the which recurring patterns can be captured. In digitial signal processing, the Nyquist’s rate is the minimum sampling period required to capture a pattern with period N. Essentially, the sampling rate needs to be less than half of one cycle of the recurring pattern. For example, let us say there is a feature in the data that measures the number sales every 6 hours. The most granular pattern that can be captured will be one that reoccurs every 12 hours. In most business related applications, the time series have non-constant mean and variance over time, or are non-stationary. This is contrasted to the stationary signals and systems used in the analysis of electrical circuits, audio engineering, and communication systems. The problem with using signal processing on non-stationary processes is that it violates an assumption of the most fundamental signal processing algorithm, the Fourier transformation. “The Fourier transform assumes that the signal is stationary and that the signals in the sample continue into infinity. The Fourier transform performs poorly when this is not the case.” One potential solution is to use an autoregressive model.
     </p>
     
-    <h3>Autoregressive Models</h3>
+    <h1>Autoregressive Models</h1>
     
     <p>
     One thing that is really cool about autoregressive models is that they are similar to open loop feedback systems, a type of control system. The objective function for these models is buried under some heavy, almost nonsensical, mathematics, but I finally found a trick to build autoregressive models by searching Wikipedia. The trick can be summarized in the equations below by the following operations: insert (1) into (2) to create expression (3). The result of this transformation constrains the intercept to be some proportion of the autoregressive weights. This objective function can be optimized with TensorFlow. Please see the notebook for this post <a href="https://github.com/Freedomtowin/kernelml/blob/master/autoregressive_models_tensorflow.ipynb" class="markup--anchor markup--p-anchor" rel="noopener nofollow" target="_blank">here</a>.
@@ -72,7 +72,7 @@ tags:
 
     <p>The last N lag components were used as predictors in the autoregressive model. Around 51% of the variation in the test data was explained when average ensembling the last 30 model from the last 30 epochs. The second plot, above, shows the r-squared by standard deviations from the mean of the snowballed time series. We can see that the r-squared is slightly more for the positive standard deviations (+1, +2, +3) that negative ones (-1, -2, -3) which suggests that the model might be over-predicting.</p>
     
-    <h3>Predictions with the Actual Observations</h3>
+    <h1>Predictions with the Actual Observations</h1>
     
     <p>TInstead of forecasting, we can predict the next time step given the last N values for every observation in the test dataset. The predicted time series is shown below. Around 58%, 7% more than the snowballed prediction, of the variation in the test data was explained when average ensembling the last 30 epochs from the TensorFlow optimizer. Interestingly, the ‘r-squared by standard deviations from the mean’ plot suggests that the model might be over-predicting.</p>
     
@@ -80,7 +80,7 @@ tags:
     <figure><img src='/ar_images/output_10.png' /> <figcaption></figcaption></figure>
 
 
-    <h3>Conclusion</h3>
+    <h1>Conclusion</h1>
     
     <p>I am surprised how flexible TensorFlow is, but we really only scraped the surface of the modelling possibilities for this dataset. For instance, we could have increased the number of hidden layers, used additional predictors, or performed hyper parameter tuning. The rain fall per day might have been a useful predictor for temperature. The reason for not including these extra modelling components was because the model performed reasonably well and adding these components added a significant amount of work on my part.</p>
     
