@@ -23,7 +23,7 @@ Real-Time Motion Correction— Pixel Shift — iOS
 
 <p>Pixel shift correction is a software based motion correction algorithm that approximates x and y axis lateral device motion. Camera motion can be corrected for by shifting the frame an optimal number of pixel, in the x or y direction, to maintain a stable video feed. This can be useful for taking videos at high zoom levels or to correct for “shaky” hands.</p>
 
-    <figure><img src='/pixel_shift_images/output_0.png' /> <figcaption>Figure 1. rotation around the x, y, and z axes (or pitch, roll, and yaw)</figcaption></figure>
+    <figure><img src="/pixel_shift_images/output_0.png" /> <figcaption>Figure 1. rotation around the x, y, and z axes (or pitch, roll, and yaw)</figcaption></figure>
 
 <p>The pixel shift is calculated from the <a href="https://en.wikipedia.org/wiki/Phase_correlation" data-href="https://en.wikipedia.org/wiki/Phase_correlation" class="markup--anchor markup--p-anchor" rel="noopener nofollow" target="_blank">phase correlation</a> between the current frame and previous frame and finding the pixel shift that corresponds to the maximum, normalized correlation or phase correlation. The current frame can then be pixel shifted so that the location’s of the objects in the current frame matches the previous frame. The video below shows two examples of pixel shift correction in action: 1) real-time or frame-by-frame motion correction 2) normal camera operation and 3) motion correction with a fixed reference frame. The zoom level was constant for these three modes of operation.</p>
 
@@ -32,7 +32,7 @@ Real-Time Motion Correction— Pixel Shift — iOS
 <p>The real-time motion correction was achieved by using an <a href="https://en.wikipedia.org/wiki/Exponential_smoothing" data-href="https://en.wikipedia.org/wiki/Exponential_smoothing" class="markup--anchor markup--p-anchor" rel="noopener nofollow" target="_blank">exponential average</a> between the current and previous shift corrections. A 90% weight was assigned to the current frames pixel shift correction in the exponential average. Motion correction relative to a reference frame was achieved by accumulating pixel shifts. For example, moving the camera to the left should accumulate positive y shifts and moving the camera back to the original position should decrease the y shifts back to 0. Please note that horizontal motion corresponds with a y shift because it shifts the columns of the image.</p>
 
 
-<h3>Calculating the Pixel Shift from Phase Correlation</h3>
+<h1>Calculating the Pixel Shift from Phase Correlation</h1>
 
 <p>The maximum normalized correlation between two arrays, i.e., A and B, can be found by converting the matrices into the Fourier domain. The two matrices can be converted into the Fourier domain using a Fast Fourier transform, or FFT. Correlation between these matrices can be computed in this domain by multiplying matrix A and the conjugation of matrix B. The phase correlation can be found by dividing this result by the absolute magnitude of the Fourier domain correlation matrix. Finally, the matrix is converted back to the regular domain with an inverse Fast Fourier transform, IFFT. Finally, a FFT shift operation is applied to the result. The location of maximum phase correlation in the pixel domain can be used to infer the optimal pixel shift between the two matrices.</p>
 
@@ -43,9 +43,9 @@ Real-Time Motion Correction— Pixel Shift — iOS
 
     <p>The optimal pixel between matrix A relative to B is shown in the code block above. The pixel shift was found when matrix A is shifted down 2 pixels and shift to the right 1 pixel. If matrix B is the current frame, of the video feed, and matrix A is the previous frame, the motion corrected image can be display by applying the pixel shift to matrix B.</p>
 
-    <h3>
+    <h1>
         Algorithm Details
-    </h3>
+    </h1>
 
     <p> A FFT shift operation is performed on after the phase correlation matrix is converted into the pixel domain with a IFFT. The FFT shift algorithm is used to adjust the phase correlation matrix so that the pixel shift can be interpreted with respect to the center of the image. The optimal pixel shift is found by subtracting the center coordinate of the image by the location of the maximum phase correlation.</p>
 
