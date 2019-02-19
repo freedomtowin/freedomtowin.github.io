@@ -1,0 +1,67 @@
+---
+layout: post
+title:  "Kernel Machine Learning - KernelML - Generalized Machine Learning"
+date: 2017-02-18 12:00:00
+author: Rohan Kotwani
+excerpt: "KernelML"
+tags: 
+- Optimization
+
+---
+
+
+<head>
+
+</head>
+
+<body>
+
+    <p>
+    The motivation for making this algorithm was to give analysts and data scientists a generalized machine learning algorithm for complex loss functions and non-linear coefficients. The optimizer uses a combination of simple machine learning and probabilistic simulations to search for optimal parameters using a loss function, input and output matrices, and (optionally) a random sampler.
+    </p>
+
+    </h1>Example use case:</h1>
+
+    <p>
+    Clustering methods such as K-means use Euclidean distances to compare observations. However, The Euclidean distances between the longitude and latitude data points do not map directly to Haversine distance, the distances around a sphere. If the coordinates are normalized between 0 and 1, the distance will not be accurately represented in the clustering model. A possible solution is to find a projection for latitude and longitude so that the Haversian distance to the centroid of the data points is equal to that of the projected latitude and longitude in Euclidean space.</p>
+
+    <figure><img src='/kml_images/image_0.png' /> <figcaption></figcaption></figure>
+
+    <p>
+    The result of this coordinate transformations allows you represent the Haversine distance, relative to the center, as Euclidean distance, which can be scaled and used in a cluster solution.</p>
+
+    <p>
+    Another, simpler problem is to find the optimal values of non-linear coefficients, i.e, power transformations in a least squares linear model. The reason for doing this is simple: integer power transformations rarely capture the best fitting transformation. By allowing the power transformation to be any real number, the accuracy will improve and the model will generalize to the validation data better.
+    </p>
+
+    <figure><img src='/kml_images/image_1.png' /> <figcaption></figcaption></figure>
+
+    <p>To clarify what is meant by a power transformation, the formula for the model is provided above.</p>
+
+    <h1>The algorithm:</h1>
+
+    <p>The idea behind kernelml is simple. Use the parameter update history in a machine learning model to decide how to update the next parameter set. Using a machine learning model as the backend causes a bias variance problem, specifically, the parameter updates become more biased each iteration. The problem can be solved by including a monte carlo simulation around the best recorded parameter set after each iteration.</p>
+
+    <h1>The issue of convergence:</h1>
+
+    <p>The model saves the best parameter and user-defined loss after each iteration. The model also records a history of all parameter updates. The question is how to use this data to define convergence. One possible solution is:</p>
+
+    <script src="https://gist.github.com/Freedomtowin/d7a8690837588dd328359fe1ff7ab6cf.js"></script>
+
+    <p>The formula creates a Z-score using the last 10 parameters and the best parameter. If the Z-score for all the parameters is less than 1, then the algorithm can be said to have converged. This convergence solution works well when there is a theoretical best parameter set. This is a problem when using the algorithm for clustering. See the example below.</p>
+
+    <figure><img src='/kml_images/image_2.png' /> <figcaption>Figure 1: Clustering with kernelml, 2-D multivariate normal distribution (blue), cluster solution (other colors)</figcaption></figure>
+
+    <p>We won't get into the quality of the cluster solution because it is clearly not representative of the data. The cluster solution minimized the difference between a multidimensional histogram and the average probability of 6 normal distributions, 3 for each axis. Here, the distributions can 'trade' data points pretty easily which could increase convergence time. Why not just fit 3 multivariate normal distributions? There is a problem with simulating the distribution parameters because some parameters have constraints. The covariance matrix needs to be positive, semi-definite, and the inverse needs to exist. The standard deviation in a normal distribution must be >0. The solution used in this model incorporates the parameter constraints by making a custom simulation for each individual parameter. I'm still looking for a good formulation for how to efficiently simulate the covariance matrix for a multivariate normal distribution.</p>
+
+    <h1>Why use kernelml instead of Expectation Maximization?</h1>
+
+    <p>A non-normal distribution, such as Poisson, might not fit well with other dimensions in a multivariate normal cluster solution. In addition, as the number of dimensions increases, the probability that one cluster is the only cluster that has a feature with non-zero values also increases. This poses a problem for the EM algorithm as it tries to update the covariation matrix. The covariance between the unique feature and other dimensions will be zero, or the probability that another cluster will accept an observation with this non-zero value is zero.</p>
+
+    <h1>Probabilistic optimizer benefits:</h1>
+
+    <p>The probabilistic simulation of parameters has some great benefits over fully parameterized models. First, regularization is included in the prior random simulation. For example, if the prior random simulation of parameters is between -1 and 1, it can be reasoned that the parameters will update with equal importance. In addition, while the algorithm is converging, each iteration produces a set of parameters that samples around the global, or local, minimum loss. There are two main benefits of this: 1) a confidence interval can be established for each parameter 2) the predicted output from each parameter set can be a useful feature in a unifying model. KernelML doesn't strictly generate samples from a probabilistic distribution. Instead it generate the distribution of parameters by updating parameter over boot-strapped mini-batches.</p>
+
+    <p>More information, other examples, and documentation can be found <a href="https://github.com/Freedomtowin/kernelml">here</a>.</p>
+
+</body>
