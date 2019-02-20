@@ -55,7 +55,7 @@ tags:
     
     <p>It is possible to estimate the points of highest density by performing a grid search of data points between the max-min of each dimension. However, this can be computationally expensive when the dimensionality of the data is high. The equation (1) shown the kernel density estimation equation.</p>
 
-    <figure><img src='/kml_images/output_2.png' /> <figcaption></figcaption></figure>
+    <figure><img src='/hdre_images/output_2.png' /> <figcaption></figcaption></figure>
     
     <p>The K function corresponds to a Gaussian kernel, h is the kernel's bandwidth, n is the number of data points, x is the dataset, and x_i is a grid point. The reason why using the KDE is impractical for estimating high density region can be seen in the following example: let's say we have a medium size dataset with 10,000 rows and 30 columns. If we search 15 data points between the max and min of each dimension, the density will need to be estimated for a total of 15³⁰ data points. The cost is multiplied by the, vectorized, operation(s) needed to compute the distances between each grid point and the rest of the dataset. After computing the highest points of density, a "peak clustering" algorithm would be needed to assign high density points to a region.</p>
     
@@ -65,9 +65,13 @@ tags:
 
     <p>Part 1) the HDRE cluster solution's and and the data's KDE were compared by dividing the N-dimensional space into sets of 2-D slices. The KDE was computed for those slices. The loss metric can then be aggregated for each 2-D KDE slice which reduces the computational complexity from N² to (N+1)*N/2 -N. Part 2) The 2-D KDE can be estimated with a 2-D Gaussian filtered histogram. The filter makes each KDE slice continuous and smooths out the loss function. Fast Fourier transforms can be used to compute the convolution between the Gaussian filter and the (histogram) KDE. This further decreases the computational overhead. Part 3) There are many loss metrics that can compare the similarity between 2-D KDE slices. Sum of squared errors is a good metric because it maximizes the error on large differences and minimizes the error on smaller differences. The equation below (2), summarizes the loss metric used by the HDRE algorithm.</p>
     
-    <figure><img src='/kml_images/output_3.png' /> <figcaption></figcaption></figure>
+    <figure><img src='/hdre_images/output_3.png' /> <figcaption></figcaption></figure>
     
     <p>The loss metric takes the sum of squared errors between the 2-D KDE slices for the cluster solution and the data. The KDE slices are created and compared for unique dimensional pair combinations. Because the the HDRE clusters are uniform distributions, the KDE can be easily filled in with a few data points and then L-1 normalized. The top plot, below, shows the Gaussian filtered HDRE cluster solution for the example shown in the video, in the first section. Notice how the jagged edges of the uniform distribution clusters are smoothed out. The bottom plot shows the KDE for the original, multivariate Gaussian distributed, data.</p>
+    
+    <figure><img src='/hdre_images/output_4.png' /> <figcaption>Gaussian Filtered KDE - Uniform Distribution - Cluster Solution</figcaption></figure>
+    
+    <figure><img src='/hdre_images/output_5.png' /> <figcaption>Multivariate Gaussian Distributed Data</figcaption></figure>
     
     <h1>Final Notes</h1>
 
