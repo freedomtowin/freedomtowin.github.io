@@ -27,7 +27,7 @@ tags:
 <p><img src='/ts_challenge_images/n_point_DFT.tiff' /></p>
 
 <ul>
-<li>k ? [0,N-1] or k ? [?N/2, N/2?1] or k ? [?(N?1)/2, (N?1)/2]</li>
+<li>k ∈ [0,N-1] or k ∈ [-N/2, N/2-1] or k ∈ [-(N-1)/2, (N-1)/2]</li>
 <li>N = # of data points</li>
 <li>n = rank order of input data points</li>
 <li>k = rank order of output data points</li>
@@ -37,7 +37,7 @@ tags:
 
 <p>"The Fourier transform assumes that the signal is stationary and that the signals in the sample continue into infinity. The Fourier transform performs poorly when this is not the case."</p>
 
-<p>A stationary process has a constant mean and variance over time which is a property that most time series don't have. A stationary process can be extracted from the time series by creating a time differenced variable. However, the complex magnitudes from the time difference variable does not represent the actual signal. A regression model can then be used to recontruct the magnitudes of this signal.</p>
+<p>A stationary process has a constant mean and variance over time which is a property that most time series don't have. A stationary process can be extracted from the time series by creating a time differenced variable. However, the complex magnitudes from a time difference variable is not representatitve of the actual signal. A regression model can then be used to recontruct the magnitudes of this signal.</p>
 
 <h3>Model Definition</h3>
 
