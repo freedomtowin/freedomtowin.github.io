@@ -37,9 +37,9 @@ tags:
     
     <p>It is possible to do a pull-request on scikit-learn’s current implementation of the Gaussian mixture model and modify the optimization procedure to keep equal weight on all clusters.</p>
     
-    <figure><img src='/hdre_images/output_0.png' /> <figcaption>HDRE solution</figcaption></figure>
+    <figure><img src='/hdre_images/output_0.png' /> <figcaption>GMM solution</figcaption></figure>
     
-    <figure><img src='/hdre_images/output_1.png' /> <figcaption>GMM solution</figcaption></figure>
+    <figure><img src='/hdre_images/output_1.png' /> <figcaption>HDRE solution</figcaption></figure>
 
     <p>
     A cutoff threshold was found so that 80% of the data was clustered for both methods. Sklearn’s GaussianMixture class has an “_estimate_log_prob_resp” attribute that can be used to find the raw probabilities of an observation belonging to the closest cluster, i.e., the maximum exponential of the log probabilities. Notice how the Gaussian mixture solution tends to push close clusters away from each other. HDRE clusters are assigned data points only if the data points are within that cluster’s N-dimensional hyper-cube. Not all observations are within a hyper-cube cluster so a small variance-buffer can be added to the increase the size of each hyper-cube. If data point lies within multiple hyper-cube clusters, the data point can be assigned to the closest HDRE cluster, where distance is calculated using a Chebyshev distance metric.</p>
