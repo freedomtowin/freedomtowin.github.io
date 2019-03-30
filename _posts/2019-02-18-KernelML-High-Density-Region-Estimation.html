@@ -27,7 +27,7 @@ tags:
 
     <p>My approach to developing this algorithm was to find a set of, common sense, constraints to construct the loss metric.</p>
     
-    <p>The high density region estimator, HDRE, algorithm uses N multivariate uniform distributions to cluster the data. Uniform distributions are less sensitive to outliers than normal distributions, and these distribution truncate low correlation across the vertical and horizontal axes while keeping high correlations along the diagonal axes. The clusters are constrained to shared variance across all clusters and equal variance across all dimensions. The data should be normalized to allow the clusters to scale properly across each dimension. The video below shows the HDRE algorithm in action.</p>
+    <p>The high density region estimator, HDRE, algorithm uses N multivariate uniform distributions to cluster the data. Uniform distributions are less sensitive to outliers than normal distributions, and these distribution truncate low correlation across the vertical and horizontal axes while keeping high correlations along the diagonal axes. The clusters are constrained to shared variance across all clusters and equal variance across all dimensions. The data should be normalized to allow the clusters to scale properly across each dimension. Alternatively, the variance for each across each dimension can be shared to produce similar results. In future releases of KernelML, shared variance across each dimensions for each cluster will become the standard feature. The video below shows the HDRE algorithm in action.</p>
     
     <iframe width="560" height="315" src="https://www.youtube.com/embed/W6Ey0i7ayBc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     
@@ -72,7 +72,7 @@ tags:
     
     <h1>Final Notes</h1>
 
-    <p>Three criteria were used to evaluate the quality of each cluster solution: 1) the overall loss metric 2) the uniformity of cluster weights 3) the similarity of the observations to the cluster's centroid. The HDR estimator was added to KernelML as an extension. If you are interested in supporting KernelML's development and would like to add your own domain specific extension, I will be adding KernelML extensions in exchange for donations! I couldn't find many resources on this particular topic. I credit the term "high density regions" to the paper below.</p>
+    <p>Three criteria were used to evaluate the quality of each cluster solution: 1) the overall loss metric 2) the uniformity of cluster weights 3) the similarity of the observations to the cluster's centroid. The HDR estimator was added to KernelML as an extension. If you are interested in supporting KernelML's development and would like to add your own domain specific extension, I will be adding KernelML extensions in exchange for donations! I couldn't find many resources on this particular topic. I credit the term "high density regions" to the paper below. Please see this <a href="https://www.datasciencecentral.com/profiles/blogs/decomposition-of-statistical-distributions-using-mixture-models-a">article</a> on datasciencecentral.com for a different perspective on the deconvolution of statistical distributions with mixture models.</p>
 
     <p>Fadallah, A. "High Density Regions for Uni- and Bivariate Densities." https://thesis.eur.nl/pub/9449/9449-Fadallah.pdf Rotterdam, 6 July 2011</p>
 
