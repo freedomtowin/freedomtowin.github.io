@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Non-Gaussian Mixture Models - The Covariance Matrix Transform"
+title:  "The Covariance Matrix Transform— Non-Gaussian Mixtures"
 date: 2019-05-09 12:00:00
 author: Rohan Kotwani
 excerpt: "Essential information about the covariance matrix for data scientists"
@@ -27,13 +27,16 @@ tags:
     <p>
     The covariance matrix can be decomposed into multiple unique (2x2) covariance matrices. The number of unique sub-covariance matrices is equal to the number of elements in the lower half of the matrix, excluding the main diagonal. A (DxD) covariance matrices will have D*(D+1)/2 -D unique sub-covariance matrices. For example, a three dimensional covariance matrix is shown in equation (0).</p>
     
-
-
-    <p>Note that generating random sub-covariance matrices might not result in a valid covariance matrix. The covariance matrix must be positive semi-definite and the variance for each dimension the sub-covariance matrix must the same as the variance across the diagonal of the covariance matrix.</p>
-
     
+    <figure><img src='/non_gauss_images/output_0.png' /> <figcaption></figcaption></figure>
+
+
+    <p>It can be seen that each element in the covariance matrix is represented by the covariance between each (i,j) dimension pair. Equation (1), shows the decomposition of a (DxD) into multiple (2x2) covariance matrices. For the (3x3) dimensional case, there will be 3*4/2–3, or 3, unique sub-covariance matrices.</p>
     
     <figure><img src='/non_gauss_images/output_1.png' /> <figcaption></figcaption></figure>
+    
+
+    <p>Note that generating random sub-covariance matrices might not result in a valid covariance matrix. The covariance matrix must be positive semi-definite and the variance for each dimension the sub-covariance matrix must the same as the variance across the diagonal of the covariance matrix.</p>
     
     <h1>Positive Semi-Definite Property</h1>
     
@@ -45,8 +48,6 @@ tags:
     
     <p>A covariance matrix, M, can be constructed from the data with the following operation, where the M = E[(x-mu).T*(x-mu)]. Inserting M into equation (2) lead to equation (3). It can be seen that any matrix that can be written in the form M.T*M is positive semi-definite. This full proof can be found <a href="https://ttic.uchicago.edu/~dmcallester/ttic101-07/lectures/Gaussians/Gaussians.pdf">here</a>.</p>
     
-    
-
     
     <figure><img src='/non_gauss_images/output_3.png' /> <figcaption></figcaption></figure>
     
