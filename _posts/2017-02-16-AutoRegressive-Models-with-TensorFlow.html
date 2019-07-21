@@ -82,7 +82,7 @@ tags:
 
     <h1>Conclusion</h1>
     
-    <p>I am surprised how flexible TensorFlow is, but we really only scraped the surface of the modelling possibilities for this dataset. For instance, we could have increased the number of hidden layers, used additional predictors, or performed hyper parameter tuning. The rain fall per day might have been a useful predictor for temperature. The reason for not including these extra modelling components was because the model performed reasonably well and adding these components added a significant amount of work on my part.</p>
+    <p>It is surprising how flexible TensorFlow layers can be. Additional model tuning and dataset could potential improve the results. For example, the number of hidden layers could be increased, additional predictors could be used, and regularization/intialization hyper parameters could be tuned. Rain fall per day is potentially a useful predictor for the target, temperature. The model performed reasonably well and adding these components added a significant amount project complexity.</p>
     
     <p>I also built an autoregressive model with my custom optimizer, KernelML. I would argue that KernelML adds a little more modelling flexibility that can potentially lead to better model performance by making it easier to inject human intelligence into the model building process. My next blog post will show how using KernelML makes it easier to add more features and to make the model more complex, such as adding a feedback component (creating a closed-loop system).</p>
     
