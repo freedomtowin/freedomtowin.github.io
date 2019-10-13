@@ -18,7 +18,7 @@ tags:
 <body>
 
     <p>
-    The covariance matrix has many interesting properties, and it can be found in mixture models, component analysis, Kalman filters, and more. Developing an intuition for how the covariance matrix operates is useful in understanding its  practical implications. This article will focus on a few important properties, associated proofs, and then some interesting practical applications, i.e., extracting transformed polygons from a Gaussian mixture's covariance matrix.</p>
+    The covariance matrix has many interesting properties, and it can be found in mixture models, component analysis, Kalman filters, and more. Developing an intuition for how the covariance matrix operates is useful in understanding its  practical implications. This article will focus on a few important properties, associated proofs, and then some interesting practical applications, i.e., extracting transformed 2-D polygons from a Gaussian mixture's covariance matrix.</p>
     
     <p>I have often found that research papers do not specify the matrices' shapes when writing formulas. I have included this and other essential information to help data scientists code their own algorithms.</p>
 
@@ -118,9 +118,21 @@ tags:
     
     <p>Another potential use case for a uniform distribution mixture model could be to use the algorithm as a kernel density classifier. The mean value of the target could be found for data points inside of the hypercube and could be used as the probability of that cluster to having the target. This algorithm would allow the cost-benefit analysis to be considered independently for each cluster.</p>
     
+    
+    <h1>Principal Component Analysis</h1>
+    
+    <p>Principal component anaylsis, or PCA, utitlizes a dataset's covariance matrix to transform the dataset into a set of orthogonal features that captures the largest spread of data. When PCA is used for dimensionality reduction, the top (most important) principal components are selected. The code snippet below hows the covariance matrix's eigenvectors and eigenvalues can be used to generate principal components.</p>
+    
+    <script src="https://gist.github.com/freedomtowin/665a93805972407d7ab547b85a4e86f8.js"></script>
+    
+    <p> The eigenvector matrix can be used, directly, to transform the centered dataset. This is because the eigenvectors of the covariance matrix are already orthogonal to each other capture the highest spread of data.</p>
+    
+    <p>The top N eigenvectors that capture the highest spread of data can be found by selecting the corresponding highest eigenvalues.</p>
+    
     <h1>Final Notes</h1>
     
-    <p>There are many more interesting use cases and properties not covered in this article: 1) the relationship between covariance and correlation 2) finding the <a href="https://ieeexplore.ieee.org/document/8144941">nearest correlation matrix</a> 3) the covariance matrix's applications in Kalman filters, Mahalanobis distance, and principal component analysis 4) how to calculate the covariance matrix's eigenvectors and eigenvalues 5) how Gaussian mixture models are optimized.</p>
+    <p>There are many more interesting use cases and properties not covered in this article: 1) the relationship between covariance and correlation 2) finding the <a href="https://ieeexplore.ieee.org/document/8144941">nearest correlation matrix</a> 3) the covariance matrix's applications in Kalman filters, and Mahalanobis distance 4) how to calculate the covariance matrix's eigenvectors and eigenvalues 5) how Gaussian mixture models are optimized.</p>
+    
     
     <h1>Resources</h1>
     
