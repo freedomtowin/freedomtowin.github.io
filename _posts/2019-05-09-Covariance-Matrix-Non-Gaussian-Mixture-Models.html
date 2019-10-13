@@ -121,13 +121,15 @@ tags:
     
     <h1>Principal Component Analysis</h1>
     
-    <p>Principal component anaylsis, or PCA, utitlizes a dataset's covariance matrix to transform the dataset into a set of orthogonal features that captures the largest spread of data. When PCA is used for dimensionality reduction the top, or most important, principal components are selected. The code snippet below hows the covariance matrix's eigenvectors and eigenvalues can be used to generate principal components.</p>
+    <p>Principal component anaylsis, or PCA, utitlizes a dataset's covariance matrix to transform the dataset into a set of orthogonal features that captures the largest spread of data.  The code snippet below hows the covariance matrix's eigenvectors and eigenvalues can be used to generate principal components.</p>
     
     <script src="https://gist.github.com/freedomtowin/665a93805972407d7ab547b85a4e86f8.js"></script>
     
     <p> The eigenvector matrix can be used, directly, to transform the centered dataset. This is because the eigenvectors of the covariance matrix are already orthogonal to each other capture the highest spread of data.</p>
     
-    <p>The top N eigenvectors that capture the highest spread of data can be found by selecting the corresponding highest eigenvalues. The dataset should be standardize prior to computing the covariance matrix's values influence component importance.</p>
+    <p>PCA can be used for dimensionality reduction by selecting the eigenvectors that capture the highest spread of data or having the highest corresponding eigenvalues.</p>
+    
+    <p>The dataset's columns should be standardized prior to computing the covariance matrix to ensure that each column is weighted equally.</p>
     
     <h1>Final Notes</h1>
     
