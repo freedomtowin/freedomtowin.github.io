@@ -13,11 +13,11 @@ tags:
 
 <h1>Train a Robust Classifier using a GPU</h1>
 
-<p>This <a>href="https://colab.research.google.com/drive/1AptayjRoDITNLmyfCc0T7z_xKFBlg2l-">notebook</a> shows the optimization of a multi-class, linear support vector machine using a simulation based optimizer. Any simulation based optimizer could be used with the cuda kernel in this notebook. I used KernelML, my custom optimizer, in this example. The runtime for this script should be set to use the GPU: Runtime->Change runtime type.</p>
+<p>This <a href="https://colab.research.google.com/drive/1AptayjRoDITNLmyfCc0T7z_xKFBlg2l-">notebook</a> shows the optimization of a multi-class, linear support vector machine using a simulation based optimizer. Any simulation based optimizer could be used with the cuda kernel in this notebook. I used KernelML, my custom optimizer, in this example. The runtime for this script should be set to use the GPU: Runtime->Change runtime type.</p>
 
-<a>href="https://www.mit.edu/~dbertsim/papers/Machine%20Learning%20under%20a%20Modern%20Optimization%20Lens/Robust_Classification.pdf">Robust Classifier 2019 section 6.1</a>
+<ahref="https://www.mit.edu/~dbertsim/papers/Machine%20Learning%20under%20a%20Modern%20Optimization%20Lens/Robust_Classification.pdf">Robust Classifier 2019 section 6.1</a>
 
-<p>The original SVM formulation can be found in this paper: <a>href="https://www.svms.org/training/BOGV92.pdf">Vapnik 1992</a>. There have been advances to the robustness of the algorithm since then. Please see <a>href="https://www.mit.edu/~dbertsim/papers/Machine%20Learning%20under%20a%20Modern%20Optimization%20Lens/Robust_Classification.pdf">Robust Classifier 2019 section 6.1</a>. The robust impementation looks very tedious to implement. If you are interested in implementing it, please consider emailing me as well as looking at KernelML’s documentation. Email: rohankotwani@gmail.com.</p>
+<p>The original SVM formulation can be found in this paper: <a href="https://www.svms.org/training/BOGV92.pdf">Vapnik 1992</a>. There have been advances to the robustness of the algorithm since then. Please see <a href="https://www.mit.edu/~dbertsim/papers/Machine%20Learning%20under%20a%20Modern%20Optimization%20Lens/Robust_Classification.pdf">Robust Classifier 2019 section 6.1</a>. The robust impementation looks very tedious to implement. If you are interested in implementing it, please consider emailing me as well as looking at KernelML’s documentation. Email: rohankotwani@gmail.com.</p>
 
 <p>SVM are typically optimized using Langrage multiplers and quadratic programming. However, this optimization process might not be fast enough, and we want to utilize GPUs. :) We will optimize the SVM primal form with brute force methods. Actually, using a simulation based approach is not such a bad idea because the computational complexity of training an SVM is O(N³), where N is the number of data points.</p>
 
@@ -27,4 +27,4 @@ The loss function penalizes incorrectly classified data points by the distance t
 
 <figure><img src='/svm_gpu_images/output_1.png' /> <figcaption>Vapnik 1992</figcaption></figure>
 
-<p>The Iris dataset was used to test the feasibility of using a GPU for simulated based optimization. The dataset has 150 rows and 4 columns. It is a small dataset, but the optimization procedure seems to work. The optimizer's documentation can be found <a>href="https://github.com/freedomtowin/kernelml/blob/master/README.md">here</a>  and the cpu parallel implementation of this algorithm can be found <a>href="https://github.com/freedomtowin/kernelml/blob/master/kernelml-support-vector-machine.py">here</a> .</p>
+<p>The Iris dataset was used to test the feasibility of using a GPU for simulated based optimization. The dataset has 150 rows and 4 columns. It is a small dataset, but the optimization procedure seems to work. The optimizer's documentation can be found <a href="https://github.com/freedomtowin/kernelml/blob/master/README.md">here</a>  and the cpu parallel implementation of this algorithm can be found <a href="https://github.com/freedomtowin/kernelml/blob/master/kernelml-support-vector-machine.py">here</a> .</p>
