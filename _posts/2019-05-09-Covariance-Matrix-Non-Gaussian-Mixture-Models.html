@@ -67,16 +67,16 @@ tags:
     <p>
     Lambda is the eigenvalue (1x1) scalar, z is the eigenvector (Dx1) matrix, and M is the (DxD) covariance matrix. A positive semi-definite (DxD) covariance matrix will have D eigenvalues and (DxD) eigenvectors. The first eigenvector is always in the direction of highest spread of data, all eigenvectors are orthogonal to each other, and all eigenvectors are normalized, i.e. they have values between 0 and 1. Equation (5) shows the vectorized relationship between the covariance matrix, eigenvectors, and eigenvalues.</p>
     
+        <figure><img src='/non_gauss_images/output_5.png' /> <figcaption></figcaption></figure>
     
-    
-    <p>The eigenvalues and eigenvectors, calculated from covariance matrix, can be represented at a scaling and rotation matrix. S is the (DxD) diagonal scaling matrix, where the diagonal values correspond to the eigenvalue and which represent the variance of each eigenvector. R is the (DxD) rotation matrix that represents the direction of each eigenvalue.
+    <p>S is the (DxD) diagonal scaling matrix, where the diagonal values correspond to the eigenvalue and which represent the variance of each eigenvector. R is the (DxD) rotation matrix that represents the direction of each eigenvalue.
     </p>
     
     <figure><img src='/non_gauss_images/output_6.png' /> <figcaption></figcaption></figure>
     <p></p>
     <figure><img src='/non_gauss_images/output_7.png' /> <figcaption></figcaption></figure>
     
-    <p>The eigenvector and eigenvalue matrices are shown in the equation (6) and (7) for a unique (i,j) sub-covariance (2D) matrix. The eigenvector matrix one parameter, theta, that controls the amount of rotation between each (i,j) dimension pair. The covariance matrix's eigenvalues are across the diagonal elements of equation (7) and represent the variance of each dimension. It has D parameters that control the scale of each eigenvector.</p>
+    <p>The eigenvector and eigenvalue matrices are represented, in the equations above, for a unique (i,j) sub-covariance (2D) matrix. The sub-covariance matrix's eigenvectors, shown in equation (6), has one parameter, theta, that controls the amount of rotation between each (i,j) dimensional pair. The covariance matrix's eigenvalues are across the diagonal elements of equation (7) and represent the variance of each dimension. It has D parameters that control the scale of each eigenvector.</p>
     
     <h1>The Covariance Matrix Transformation</h1>
 
