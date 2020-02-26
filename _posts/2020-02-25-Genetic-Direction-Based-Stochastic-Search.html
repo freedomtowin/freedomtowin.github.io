@@ -34,11 +34,17 @@ Scipy has the following global optimization strategies: basin hopping, brute for
 
 <p>
 Formulation
+
 Ranking
+
 Optimization Components
+
 Normal Distribution Crossovers
+
 Uniform Distribution Crossovers
+
 Combinatorial Mutations
+
 Deduplication
 </p>
 
@@ -49,11 +55,17 @@ The code for this example can be found here. A test example for constrained opti
 </p>
 <p>
 minimize obj: x**2+y
+
 s.t.
+
 eq: 2*x - y = 0
+
 ineq : x + y + 1 > 0
+
 genetic obj: x**2+y + p1*eq(x)**2 + p1*min(0,ineq(x))**2
-bounds: -5<x<5, -5<y<5
+
+bounds: -5&lex&ge5, -5&ley&ge5
+    
 </p>
 <p>
 The initial population is generated from a random uniform distribution between the upper and lower bound for each parameter.
@@ -66,16 +78,23 @@ After the initial population is generated, the losses are calculated for each ca
 <h1>Direction Components</h1>
 <p>
 The direction components are made of averages between the top candidates. There are four main components:
+
 (1) candidate pair XNi
+
 (2) candidate pair XMi
+
 (3) the average of the top N candidates AVGN
+
 (4) the current best candidate BEST
+
 (5) an average of (1), (3), and (4) DAVG.
 </p>
 <h1>Normal Distribution Crossovers</h1>
 <p>
 NORMAL(DAVG,((XNi-XMi)/12)**2+e-15))
+
 NORMAL(BEST,((BEST-AVGN)/12)**2 +e-15))
+
 </p>
 <p>
 The first crossover searches the space between the AVGN, BEST, and XNi. The search energy is defined as the squared uniform distance between XNi and XMi. The larger the difference between the ith ranked candidate and the 50+ith ranked individual, the larger the search space will be. The second crossover searches around the BEST candidate using the square uniform distance between the BEST and AVGN as the search energy.
@@ -83,6 +102,7 @@ The first crossover searches the space between the AVGN, BEST, and XNi. The sear
 <h1>Uniform Distribution Crossovers</h1>
 <p>
 BEST + UNIFORM(0,1)*(XNi-XMi)
+
 DAVG + UNIFORM(0,1)*(BEST-DAVG)
 </p>
 <p>
@@ -91,7 +111,9 @@ The first crossover uses the difference between XNi and XMi as surrogate gradien
 <h1>Combinatorial Mutations</h1>
 <p>
 XNi *(1+CAUCHY(0,1))
+
 NORMAL(BEST,((BEST-XNi)/12)**2 +e-15))
+
 XNi +0.01*LEVY(1)
 </p>
 <p>
