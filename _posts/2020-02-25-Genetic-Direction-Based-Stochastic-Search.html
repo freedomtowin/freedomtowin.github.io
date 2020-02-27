@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Genetic Optimization Using Direction-Based Stochastic Search"
-date: 2019-02-19 12:00:00
+date: 2020-02-25 12:00:00
 author: Rohan Kotwani
 excerpt: "A Modern Genetic Optimization Method  (2019)"
 tags:
@@ -26,7 +26,7 @@ Genetic algorithms have been used for optimization since the 1960's. With the in
 
 The main use case covered in this paper is constrained optimization. This includes linear programming and non-linear programming optimization problem. Linear programming can be used to find exact solutions for a parameterized function with a set of constraints. However, problems cannot always be defined as a parameterized function. For example, if the problem relying on computing some metric on a large dataset, has a large candidate space, or has fewer constraints than parameters, it might be better to use evolutionary strategies.
 </p>
-<p>
+≈
 Scipy has the following global optimization strategies: basin hopping, brute force, differential evolution, SHGO, and dual annealing. The full list can be found here.
 </p>
 
@@ -51,9 +51,13 @@ Deduplication
 
 <h1>Formulation</h1>
 <p>
-The code for this example can be found here. A test example for constrained optimization is shown below. The problem has both equality and inequality constraints. Constraints cannot be explicitly applied to genetic algorithms due to the stochastic nature of the algorithm. An L2 penalty can be added to the constraint functions to account for constraints, where p1 and p2 are scaling parameters.
+The code for this example can be found here. A test example for constrained optimization is shown below. The problem has both equality and inequality constraints. Constraints cannot be explicitly applied to genetic algorithms due to the stochastic nature of the algorithm. An L2 penalty can be added to the constraint functions to account for constraints.
 </p>
 <p>
+The equation below show the original objective function (obj), equality constraint (eq), inequality constraint (ineq), the objective function modified for the gentic algorithm, and the parameters' upper and lower bounds. L2 penalty values, p1 and p2, are applied to the equality and inequality constraints.
+</p>
+
+<code>
 minimize obj: x**2+y
 
 s.t.
@@ -66,7 +70,8 @@ genetic obj: x**2+y + p1*eq(x)**2 + p1*min(0,ineq(x))**2
 
 bounds: -5&lex&ge5, -5&ley&ge5
     
-</p>
+</code>
+
 <p>
 The initial population is generated from a random uniform distribution between the upper and lower bound for each parameter.
 </p>
@@ -92,17 +97,19 @@ The direction components are made of averages between the top candidates. There 
 <h1>Normal Distribution Crossovers</h1>
 <p>
 NORMAL(DAVG,((XNi-XMi)/12)**2+e-15))
-
-NORMAL(BEST,((BEST-AVGN)/12)**2 +e-15))
-
 </p>
+<p>
+NORMAL(BEST,((BEST-AVGN)/12)**2 +e-15))
+</p>
+
 <p>
 The first crossover searches the space between the AVGN, BEST, and XNi. The search energy is defined as the squared uniform distance between XNi and XMi. The larger the difference between the ith ranked candidate and the 50+ith ranked individual, the larger the search space will be. The second crossover searches around the BEST candidate using the square uniform distance between the BEST and AVGN as the search energy.
 </p>
 <h1>Uniform Distribution Crossovers</h1>
 <p>
 BEST + UNIFORM(0,1)*(XNi-XMi)
-
+</p>
+<p>
 DAVG + UNIFORM(0,1)*(BEST-DAVG)
 </p>
 <p>
@@ -111,9 +118,11 @@ The first crossover uses the difference between XNi and XMi as surrogate gradien
 <h1>Combinatorial Mutations</h1>
 <p>
 XNi *(1+CAUCHY(0,1))
-
+</p>
+<p>
 NORMAL(BEST,((BEST-XNi)/12)**2 +e-15))
-
+</p>
+<p>
 XNi +0.01*LEVY(1)
 </p>
 <p>
