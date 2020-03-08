@@ -57,7 +57,7 @@ The code for this example can be found here. A test example for constrained opti
 The equation below show the original objective function (obj), equality constraint (eq), inequality constraint (ineq), the objective function modified for the gentic algorithm, and the parameters' upper and lower bounds. L2 penalty values, p1 and p2, are applied to the equality and inequality constraints.
 </p>
 
-<figure><img src='/moircga_images/output_7.png' /> <figcaption></figcaption></figure>
+<figure><img src='/moircga_images/image_7.png' /> <figcaption></figcaption></figure>
 
 <p>
 Where eq and ineq are the equality and inequality constraints, respectively. The initial population is generated from a random uniform distribution between the upper and lower bound for each parameter.
@@ -82,22 +82,22 @@ The direction components are made of averages between the top candidates. There 
 (5) an average of (1), (3), and (4) DAVG.
 </p>
 <h1>Normal Distribution Crossovers</h1>
-<figure><img src='/moircga_images/output_0.png' /> <figcaption></figcaption></figure>
-<figure><img src='/moircga_images/output_1.png' /> <figcaption></figcaption></figure>
+<figure><img src='/moircga_images/image_0.png' /> <figcaption></figcaption></figure>
+<figure><img src='/moircga_images/image_1.png' /> <figcaption></figcaption></figure>
 
 <p>
 The first crossover searches the space between the AVGN, BEST, and XNi. The search energy is defined as the squared uniform distance between XNi and XMi. The larger the difference between the ith ranked candidate and the 50+ith ranked individual, the larger the search space will be. The second crossover searches around the BEST candidate using the square uniform distance between the BEST and AVGN as the search energy.
 </p>
 <h1>Uniform Distribution Crossovers</h1>
-<figure><img src='/moircga_images/output_2.png' /> <figcaption></figcaption></figure>
-<figure><img src='/moircga_images/output_3.png' /> <figcaption></figcaption></figure>
+<figure><img src='/moircga_images/image_2.png' /> <figcaption></figcaption></figure>
+<figure><img src='/moircga_images/image_3.png' /> <figcaption></figcaption></figure>
 <p>
 The first crossover uses the difference between XNi and XMi as surrogate gradient. A standard uniform distribution is used with shift the BEST in the direction of the surrogate gradient. The second crossover uses a surrogate gradient with (BEST-DAVG), and it shift DAVG in the direction of the BEST.
 </p>
 <h1>Combinatorial Mutations</h1>
-<figure><img src='/moircga_images/output_4.png' /> <figcaption></figcaption></figure>
-<figure><img src='/moircga_images/output_5.png' /> <figcaption></figcaption></figure>
-<figure><img src='/moircga_images/output_6.png' /> <figcaption></figcaption></figure>
+<figure><img src='/moircga_images/image_4.png' /> <figcaption></figcaption></figure>
+<figure><img src='/moircga_images/image_5.png' /> <figcaption></figcaption></figure>
+<figure><img src='/moircga_images/image_6.png' /> <figcaption></figcaption></figure>
 <p>
 A percentage of the crossover candidates will be mutated by three different operations. The operations can be randomly selected. The standard Cauchy distribution has a median value of 1, but its mean and variance are undefined. The first mutation changes the scale and/or direction of the candidate by some proportion of generated Cauchy number + 1. The second mutation re-samples the candidate around the BEST by the squared uniform distance of BEST to the candidate. The third mutation uses Levy flights to simulate a random walk characterized by many small changes and a few large displacements.
 </p>
