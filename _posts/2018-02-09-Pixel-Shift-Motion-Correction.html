@@ -29,7 +29,7 @@ tags:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/eaNhPRktjDA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-<p>The pixel shift values are with respect to the previous frame. For example, moving the camera to the left should result in positive y shifts and moving the camera back to the original position should have negative y shifts. Please note that horizontal motion corresponds with a y shift because it shifts the columns of the image.</p>
+<p>The pixel shift values are with respect to the previous frame. For example, moving the camera to the left should result in positive y shifts, and moving the camera back to the original position should have negative y shifts. Please note that horizontal motion corresponds with a y shift because it shifts the columns of the image.</p>
 
 <p>Relatively slow movements can produce many small, un-noticable, corrections because the camera phone captures many frames per second. One potential fix is to scale the pixel shifts as follows: (pixel shift)*(# frames)/(# seconds + 1). This makes the pixel shift values proportional to the number of frames, but can produce a large, noisy pixel shift correction. The pixel shifts were smoothed using <a href="https://en.wikipedia.org/wiki/Exponential_smoothing" data-href="https://en.wikipedia.org/wiki/Exponential_smoothing" class="markup--anchor markup--p-anchor" rel="noopener nofollow" target="_blank">exponential average</a> between the current and previous shift corrections. A 50% weight was assigned to the current frames pixel shift correction in the exponential average.</p>
 
