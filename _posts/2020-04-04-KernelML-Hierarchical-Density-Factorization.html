@@ -83,12 +83,6 @@ tags:
     <p>The samples in each cluster must be greater than the minimum-leaf-sample parameter. This parameter prevents clusters from accidentally modeling outliers by chance. This is mostly an issue in higher dimensional space due to the curse of dimensionality. If a cluster does not meet this constraint, it is pruned from the cluster solution. This process continues until 1) a new cluster solution does not capture new data points or 2) >99% of the data points have been captured (this threshold is also adjustable).
     </p>
     
-    <p>It is possible to estimate the points of highest density by performing a grid search of data points between the max-min of each dimension. However, this can be computationally expensive when the dimensionality of the data is high. The equation (1) shown the kernel density estimation equation.</p>
-
-    <figure><img src='/hdf_images/output_2.png' /> <figcaption></figcaption></figure>
-    
-    <p>The samples in each cluster must be greater than the minimum-leaf-sample parameter. This parameter prevents clusters from accidentally modeling outliers by chance. This is mostly an issue in higher dimensional space due to the curse of dimensionality. If a cluster does not meet this constraint, it is pruned from the cluster solution. This process continues until 1) a new cluster solution does not capture new data points or 2) >99% of the data points have been captured (this threshold is also adjustable).</p>
-    
     <h1>Example</h1>
 
     <p>As the input space increases in dimensionality, the Euclidean space between data points increases. For example, for an input space that contains uniform random variables, the space between space points increases by a factor of sqrt(D), where D is the number of dimensions.</p>
