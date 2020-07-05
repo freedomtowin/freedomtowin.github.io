@@ -19,10 +19,10 @@ tags:
     
     <figure><img src="https://miro.medium.com/max/1400/1*S41lkulevBoJB48ngiXyjw.png" /> <figcaption></figcaption></figure>
     
-    The 1st order approximation is applied to the autoregressive function in equation (3.1). Using the chain rule on (3.1) results in (3.2). Notice that since the function is recursive, the 1st order approximation can continue to be applied. The partial derivative is taken with respect to the weights, at t+1, and the function f(t), at t.</p>
+    The 1st order approximation is applied to the autoregressive function in equation (3.1). Using the chain rule on (3.1) results in (3.2). Notice that since the function is recursive, the 1st order approximation can continue to be applied. The partial derivative is taken with respect to the weights, at t+1, and the function f(t).</p>
     
     
-    <figure><img src="https://miro.medium.com/max/1400/1*qNClOBeDC_urRILVtQ7aGQ.png" /> <figcaption></figcaption></figure>
+    <figure><img src="https://miro.medium.com/max/1400/1*h9ZjjzIU1tlit0waeEsR1Q.png" /> <figcaption></figcaption></figure>
     
     <p name="e2f1" class="graf graf--p graf-after--figure">(3.2) can be reformulated as linear model by replacing the approximation function, f(t), with previous time series values for each lagged time step, i.e., the value of f(t-1) is replaced with y(t-1).</p><p name="4643" class="graf graf--p graf-after--p">The final form used to train the autoregressive model is shown in equation (4). The intercept is constrained to be the sum of the autoregressive weights. This allows the model to be unbiased towards a central tendency and to be adaptive over time.</p>
     
