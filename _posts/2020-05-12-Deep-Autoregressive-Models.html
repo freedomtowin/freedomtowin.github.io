@@ -22,25 +22,25 @@ tags:
     <p name="0e00" class="graf graf--p graf-after--h3">Autoregressive models and open loop feedback systems, a type of control system, have some similarities. Both of these systems depend on the previous output of the model. We would like both of these systems to be stable, i.e., not explode into an exponential output. These systems are different in that autoregressive forecasts can depend on multiple lagged input features. The form of the autoregressive model is shown in equation (0).</p>
     
     
-    <figure><img src="https://miro.medium.com/max/1400/1*853OA-CFn62pdx7z8HtPsg.png" /> <figcaption></figcaption></figure>
+    <figure><img src="https://cdn-images-1.medium.com/max/1600/1*MjtKvq75C2PROiMWVKM8IA.png" /> <figcaption></figcaption></figure>
     
     
     <p name="2aa5" class="graf graf--p graf-after--figure">Where T is number of lagged features, w represents the autoregressive weights, y(t-i) represents the lagged time series, and y*(t+1) is the predicted value at t+1.</p>
 
-    <p name="bb22" class="graf graf--p graf-after--p">The goal is to create a linearized form of the autoregressive model using the 1st order <a href="https://medium.com/r/?url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FTaylor_series" data-href="https://medium.com/r/?url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FTaylor_series" class="markup--anchor markup--p-anchor" rel="noopener" data-tooltip="https://medium.com/r/?url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FTaylor_series" data-tooltip-position="bottom" data-tooltip-type="link" target="_blank">Taylor Series</a> approximation. The autoregressive formula is recursive, meaning the next value depends on a cascade of the previous values. The value at y(t+1) is estimated with Taylor Series expansion of f(t+1) around time step t. Equation (2) shows the estimated value for y(t+1) using the 1st order Taylor Series approximation. Note, that the -1 constant, on the right hand side of equation (2), will be absorbed by the weights.</p>
+    <p name="bb22" class="graf graf--p graf-after--p is-selected">The goal is to create a linearized form of the autoregressive model using the 1st order <a href="https://medium.com/r/?url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FTaylor_series" data-href="https://medium.com/r/?url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FTaylor_series" class="markup--anchor markup--p-anchor" rel="noopener" data-tooltip="https://medium.com/r/?url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FTaylor_series" data-tooltip-position="bottom" data-tooltip-type="link" target="_blank">Taylor Series</a> approximation. The autoregressive formula is recursive, meaning the next value depends on a cascade of the previous values. The value at y(t+1) is estimated with Taylor Series expansion of f(t+1) around time step t. Equation (2) shows the estimated value for y(t+1) using the 1st order Taylor Series approximation. Note, that the -1 constant, on the right hand side of equation (2), will be absorbed by the weights.</p>
     
-    <figure><img src="https://cdn-images-1.medium.com/max/1600/1*yLjCE6hD7NUFIW_02fKvDQ.png" /> <figcaption></figcaption></figure>
+    <figure><img src="https://cdn-images-1.medium.com/max/1600/1*x34M0K7RNpvRkdSCoBeyTA.png" /> <figcaption></figcaption></figure>
     
-    <p name="164b" class="graf graf--p graf-after--figure is-selected">Where f(t) is a recursive dense layer, y* is the predicted output, w_t are the weights, and T is number of lagged features. Equation (3) shows the Taylor Series expansion for the simple case where y(t+1) depends on the previous value of f(t+1).</p>
+    <p name="164b" class="graf graf--p graf-after--figure is-selected">Where f(t) is a recursive dense layer which represents y(t) with some error term, y* is the predicted output, w_t are the weights, and T is number of lagged features. Equation (3) shows the Taylor Series expansion for the simple case where y(t+1) depends on the previous value of f(t+1).</p>
     
     <p name="3818" class="graf graf--p graf-after--p is-selected">Notice that, in equation (3.1), we only took the partial derivative of f(t+1) with respect to f(t). It is also possible to take the partial derivative of f(t+1) with respect to w(t+1). This partial derivative would result in f(t), which is another function that can be expanded with the 1st order Taylor Series expansion. Interestingly, this would result the same model form, with the only difference being an infinite number of lagged features.</p>
     
     
-    <figure><img src="https://cdn-images-1.medium.com/max/1600/1*bafaFiZFMJTRpjQP8-RmGQ.png" /> <figcaption></figcaption></figure>
+    <figure><img src="https://cdn-images-1.medium.com/max/1600/1*mA6BXcjbLSQGOcqHlfKhfA.png" /> <figcaption></figcaption></figure>
     
     <p name="e2f1" class="graf graf--p graf-after--figure">(3.2) can be reformulated as linear model by replacing the approximation function, f(t), with previous time series values for each lagged time step, i.e., the value of f(t-1) is replaced with y(t-1).</p><p name="4643" class="graf graf--p graf-after--p">The final form used to train the autoregressive model is shown in equation (4). The intercept is constrained to be the sum of the autoregressive weights. This allows the model to be unbiased towards a central tendency and to be adaptive over time.</p>
     
-    <figure><img src="https://miro.medium.com/max/1400/1*C2dHX2OT5k93HR0DNkcZ5Q.png" /> <figcaption></figcaption></figure>
+    <figure><img src="https://cdn-images-1.medium.com/max/1600/1*2uVofzlWJYupcdOmkiCmvQ.png" /> <figcaption></figcaption></figure>
     
     <p name="a9cc" class="graf graf--p graf-after--figure">Where N is the number of data points, T is total number of lagged features, w represents the autoregressive weights, y(t-i) represents the lagged time series, and y*(t+1) is the predicted value at t+1. The objective function, MSE, shown in equation (5), is differentiable with respect to the parameters and can be optimized with TensorFlow.</p>
         
