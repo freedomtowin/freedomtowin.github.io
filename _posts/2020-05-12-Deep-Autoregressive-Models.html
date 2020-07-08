@@ -33,12 +33,14 @@ tags:
     
     <p name="164b" class="graf graf--p graf-after--figure is-selected">Where f(t) is a recursive dense layer which represents y(t) with some error term, y* is the predicted output, w_t are the weights, and T is number of lagged features. Equation (3) shows the Taylor Series expansion for the simple case where y(t+1) depends on the previous value of f(t+1).</p>
     
-    <p name="3818" class="graf graf--p graf-after--p is-selected">Notice that, in equation (3.1), we only took the partial derivative of f(t+1) with respect to f(t). It is also possible to take the partial derivative of f(t+1) with respect to w(t+1). This partial derivative would result in f(t), which is another function that can be expanded with the 1st order Taylor Series expansion. Interestingly, this would result the same model form, with the only difference being an infinite number of lagged features.</p>
+    <p name="3818" class="graf graf--p graf-after--p is-selected">Notice that, in equation (3.1), we took the partial derivative of f(t+1) with respect to f(t) and with respect to w(t+1). This partial derivative would result in f(t), which is another function that can be expanded with the 1st order Taylor Series expansion. Interestingly, this would result in the same AR model form, with the only difference being an infinite number of lagged features.</p>
     
     
     <figure><img src="https://cdn-images-1.medium.com/max/1600/1*mA6BXcjbLSQGOcqHlfKhfA.png" /> <figcaption></figcaption></figure>
     
-    <p name="e2f1" class="graf graf--p graf-after--figure">(3.2) can be reformulated as linear model by replacing the approximation function, f(t), with previous time series values for each lagged time step, i.e., the value of f(t-1) is replaced with y(t-1).</p><p name="4643" class="graf graf--p graf-after--p">The final form used to train the autoregressive model is shown in equation (4). The intercept is constrained to be the sum of the autoregressive weights. This allows the model to be unbiased towards a central tendency and to be adaptive over time.</p>
+    <p name="e2f1" class="graf graf--p graf-after--figure">(3.2) can be reformulated as linear model by replacing the approximation function, f(t), with previous time series values for each lagged time step, i.e., the value of f(t-1) is replaced with y(t-1).</p>
+    
+    <p name="4643" class="graf graf--p graf-after--p">The final form used to train the autoregressive model is shown in equation (4). The intercept is constrained to be the sum of the autoregressive weights. This allows the model to be unbiased towards a central tendency and to be adaptive over time.</p>
     
     <figure><img src="https://cdn-images-1.medium.com/max/1600/1*2uVofzlWJYupcdOmkiCmvQ.png" /> <figcaption></figcaption></figure>
     
