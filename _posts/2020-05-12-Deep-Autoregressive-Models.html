@@ -31,7 +31,7 @@ tags:
     
     <figure><img src="https://cdn-images-1.medium.com/max/1600/1*8NubH1EmU_qQX3FgLD-2GA.png" /> <figcaption></figcaption></figure>
     
-    <p name="164b" class="graf graf--p graf-after--figure is-selected">Where f(t) is a recursive dense layer which represents y(t) with some error term, y* is the predicted output, w_t are the weights, and T is number of lagged features. Equation (3) shows the Taylor Series expansion for the simple case where y(t+1) depends on the previous value of f(t+1).</p>
+    <p name="164b" class="graf graf--p graf-after--figure is-selected">Where f(t) is a recursive dense layer which represents y(t) with some error term, y* is the predicted output, w_t are the weights, and T is number of lagged features. Equation (3) shows the Taylor Series expansion for the simple case where y(t+1) depends on the previous value of f(t+1).The reason why I used f(t), in equation (2), instead of using y(t) directly is because y(t) represents the actual lagged data points, not a time dependent function.</p>
     
     <p name="3818" class="graf graf--p graf-after--p is-selected">Notice that, in equation (3.1), we took the partial derivative of f(t+1) with respect to f(t) and with respect to w(t+1). This partial derivative would result in f(t), which is another function that can be expanded with the 1st order Taylor Series expansion. Interestingly, this would result in the same AR model form, with the only difference being an infinite number of lagged features.</p>
     
