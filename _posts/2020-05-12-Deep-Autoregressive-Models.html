@@ -29,7 +29,7 @@ tags:
 
     <p name="bb22" class="graf graf--p graf-after--p is-selected">The goal is to create a linearized form of the autoregressive model using the 1st order <a href="https://medium.com/r/?url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FTaylor_series" data-href="https://medium.com/r/?url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FTaylor_series" class="markup--anchor markup--p-anchor" rel="noopener" data-tooltip="https://medium.com/r/?url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FTaylor_series" data-tooltip-position="bottom" data-tooltip-type="link" target="_blank">Taylor Series</a> approximation. The autoregressive formula is recursive, meaning the next value depends on a cascade of the previous values. The value at y(t+1) is estimated with Taylor Series expansion of f(t+1) around time step t. Equation (2) shows the estimated value for y(t+1) using the 1st order Taylor Series approximation. Note, that the -1 constant, on the right hand side of equation (2), will be absorbed by the weights.</p>
     
-    <figure><img src="https://cdn-images-1.medium.com/max/1600/1*x34M0K7RNpvRkdSCoBeyTA.png" /> <figcaption></figcaption></figure>
+    <figure><img src="https://cdn-images-1.medium.com/max/1600/1*8NubH1EmU_qQX3FgLD-2GA.png" /> <figcaption></figcaption></figure>
     
     <p name="164b" class="graf graf--p graf-after--figure is-selected">Where f(t) is a recursive dense layer which represents y(t) with some error term, y* is the predicted output, w_t are the weights, and T is number of lagged features. Equation (3) shows the Taylor Series expansion for the simple case where y(t+1) depends on the previous value of f(t+1).</p>
     
