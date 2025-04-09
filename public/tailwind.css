@@ -68,6 +68,9 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
 }
+.\!flex {
+  display: flex !important;
+}
 .\!hidden {
   display: none !important;
 }
@@ -137,8 +140,17 @@
 .flex-1 {
   flex: 1;
 }
+.flex-shrink {
+  flex-shrink: 1;
+}
 .flex-shrink-0 {
   flex-shrink: 0;
+}
+.shrink {
+  flex-shrink: 1;
+}
+.flex-grow {
+  flex-grow: 1;
 }
 .grow {
   flex-grow: 1;
@@ -280,8 +292,17 @@
 .text-center {
   text-align: center;
 }
+.text-justify {
+  text-align: justify;
+}
+.text-wrap {
+  text-wrap: wrap;
+}
 .text-transparent {
   color: transparent;
+}
+.capitalize {
+  text-transform: capitalize;
 }
 .lowercase {
   text-transform: lowercase;
@@ -358,6 +379,9 @@
 .duration-500 {
   --tw-duration: 500ms;
   transition-duration: 500ms;
+}
+.\[https\:\/\/serde\.rs\/derive\.html\] {
+  https: //serde.rs/derive.html;
 }
 .group-hover\:w-full {
   &:is(:where(.group):hover *) {
