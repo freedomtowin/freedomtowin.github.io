@@ -8,9 +8,6 @@ pub use profile::Profile;
 mod work_experience;
 pub use work_experience::WorkExperience;
 
-mod testimonials;
-pub use testimonials::Testimonials;
-
 mod navbar;
 pub use navbar::NavBar;
 

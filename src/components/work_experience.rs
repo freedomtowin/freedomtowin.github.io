@@ -25,30 +25,49 @@ pub fn WorkExperience() -> Element {
 
     let companies = [
         (
-            "TROES Corp",
-            "May, 2023 - Present",
-            "Software Engineer",
-            "Developed high-performance battery management systems and remote monitoring solutions, achieving 40% improvement in data processing efficiency. Built robust battery controllers using Rust, with real-time monitoring through InfluxDB and Grafana. Designed scalable web platforms using Django and Vue.js for seamless IoT energy management.",
+            "FOOLPROOF STRATEGIES",
+            "2024 - 2025",
+            "AI/GOLANG/RUST ENGINEER",
+            "* Created over 200 articles/videos using AI-assisted content generation tools.
+            * Built scalable serverless pipelines to process and transform data from sources like videos, webpages, and PDFs.
+            * Fine-tuned models for text generation, chat completion, reranking, and text-to-speech.
+            * Served AI models and RAG through REST API, SOCKET,
+            * Built scalable infrastructure with Golang using AWS CDK, SDK, and Lambda
+            * Built AI Agents with LangGraph for a variety of tasks.
+            * Cross platform app development with Rust",
             vec![
-                "Rust", "Python", "AWS", "Redis", "Vue", "Tailwind", "Docker", "Grafana", "InfluxDB",
+                "Rust", "Python", "AWS", "Golang", "Docker", "Dioxus", "LangGraph"
             ]
         ),
         (
-            "Lambton College",
-            "Aug, 2022 - April, 2023",
-            "Research Assistant",
-            "Focused on developing remote monitoring systems for battery energy storage using Flutter, Vue.js, and Django. Designed and implemented web and mobile applications to track system performance, enabling real-time data access and improving overall monitoring efficiency.",
+            "CORE COMPETE",
+            "2022 - 2024",
+            "DATA ENGINEER",
+            r#"CAPITAL ONE
+            Supported Capital One's Data Product team to develop a Schema comparison tool to track discrepancies for schemas throughout the data pipeline from tech teams to downstream consumer data interfaces: Logical Data Models, Enterprise Dictionaries, APIs, and GraphQL servers.
+
+            SEMPRA ENERGY
+            Supported Sempra's Wildfire Risk team to migrate ETL jobs from proof-of-concept to AWS production. Created Glue jobs, SageMaker scripts, Step Functions, Lambda endpoints, Athena Tables, and Terraform scripts for dev, test, and production environments.
+
+            GAP INC
+            Built an arbitration optimization model (PuLP, Gurobi, VSCode, Pytest, Github) that distributed inventory from the distribution centers to stores. Developed business scenario testing & data\algorithm unit testing. Supported data engineering (Azure Data Factory\DataBricks) by migrating data, building data pipelines (PySpark), and exporting data (CLI) for DS model testing."#,
             vec![
-                "Python", "AWS", "Vue", "Tailwind", "Docker", "InfluxDB",
+                "Python", "Gurobi", "AWS", "Databricks", "SQL"
             ]
         ),
         (
-            "Seva Development",
-            "Oct, 2021 - Jan, 2022",
-            "Contract Based Software Engineer",
-            "Developed a data migration engine as a Software Engineer, enabling seamless data transfer between diverse sources and destinations, including MySQL, Oracle, PostgreSQL, and Salesforce. Optimized the migration process for accuracy and efficiency, ensuring reliable data handling across multiple platforms.",
+            "NATIONAL TARGETING CENTER",
+            "2018 - 2021",
+            "DATA SCIENTIST",
+            r#"Deployed two models with a large operational impact, and several auxiliary models, while supporting Customs and Border Protection on projects regarding the facilitation and security of cargo and passengers. 
+
+            Worked on all stages of machine learning model deployment, i.e., data engineering (SQL, python), concept-based data mining (Python), model development (TensorFlow, GBM), and deployment validation (Java, gRPC). 
+
+            Engaged with the client, the National Target Center, weekly, to present metrics, updates, and to gather new information. Collaborated with data engineers to understand and deploy models in a real-time complex environment.
+
+            1) Extreme class-imbalanced classification 2) Anomaly detection Markov chains implementation and simulation 3) Entity resolution 4) Graph network utilization in predictive models 5) NLP utilization in predictive model\product classification 6) Geospatial encoding 7) Open-source data collection."#,
             vec![
-                "Python", "AWS Lambda","PostgreSQL",
+                "Python", "PyTorch", "SQL"
             ]
         ),
     ];
@@ -103,6 +122,8 @@ pub fn WorkExperience() -> Element {
 
     let experience_section = {
         let (_company, duration, title, description, tech_stack) = &companies[selected_company()];
+
+        let description_split = description.split("\n");
         rsx! {
             div { class: "space-y-4",
                 h3 {
@@ -112,7 +133,16 @@ pub fn WorkExperience() -> Element {
                     "{title}"
                 }
                 p { class: "text-gray-400", "{duration}" }
-                p { class: "text-gray-300 leading-relaxed", "{description}" }
+                {
+                description_split.into_iter().map(|content| {
+                    
+                    rsx! {
+                        p { class: "text-gray-300 leading-relaxed", "{content}" }
+                    }
+                    
+                })
+                }
+                
                 div { class: "flex flex-wrap gap-2",
                     {
                         tech_stack

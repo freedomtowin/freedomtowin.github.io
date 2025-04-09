@@ -1,6 +1,6 @@
 #![allow(non_snake_case)]
 
-use components::{NavBar, Profile, ProjectGrid, Testimonials, WorkExperience};
+use components::{NavBar, Profile, ProjectGrid, WorkExperience};
 use dioxus::prelude::*;
 use dioxus_logger::tracing::Level;
 
@@ -20,7 +20,8 @@ enum Route {
 }
 pub const MARKDOWN_CSS: Asset = asset!("/assets/markdown.css");
 const MAIN_CSS: Asset = asset!("/assets/main.css");
-pub const PROFILE_PIC: Asset = asset!("/assets/pf.png");
+const FAVICON: Asset = asset!("/assets/favicon.ico");
+pub const PROFILE_PIC: Asset = asset!("/assets/1152300.png");
 pub const MOTION_PIC: Asset = asset!("/assets/dioxus-motion.png");
 pub const HTML_RSX_PIC: Asset = asset!("/assets/html-rsx.png");
 
@@ -31,7 +32,7 @@ fn main() {
 
 fn App() -> Element {
     rsx! {
-        document::Title { "Sabin Regmi" }
+        document::Title { "Rohan Kotwani" }
         document::Link { rel: "stylesheet", href: MAIN_CSS }
 
         document::Link {
@@ -59,6 +60,7 @@ pub static BLOG_PREVIEW: GlobalSignal<Option<dioxus::prelude::Event<dioxus::even
 fn Home() -> Element {
     let css = MAIN_CSS.to_string();
     rsx! {
+        document::Link { rel: "icon", href: FAVICON }
         div {
 
            class: "min-h-screen bg-background text-text-primary",
@@ -79,21 +81,21 @@ fn Home() -> Element {
                 WorkExperience {}
             }
 
-            // Project Grid
-            div {
-                onmounted: move |data| {
-                    *PROJECT_GRID.write() = Some(data);
-                },
-                ProjectGrid {}
-            }
+            // // Project Grid
+            // div {
+            //     onmounted: move |data| {
+            //         *PROJECT_GRID.write() = Some(data);
+            //     },
+            //     ProjectGrid {}
+            // }
 
-            // Blog Preview
-            div {
-                onmounted: move |data| {
-                    *BLOG_PREVIEW.write() = Some(data);
-                },
-                BlogPreview {}
-            }
+            // // Blog Preview
+            // div {
+            //     onmounted: move |data| {
+            //         *BLOG_PREVIEW.write() = Some(data);
+            //     },
+            //     BlogPreview {}
+            // }
             // Footer
             div { Footer {} }
         }

@@ -42,7 +42,7 @@ pub fn NavBar() -> Element {
                                         }
                                     },
                                     h1 { class: "text-lg font-semibold text-text-primary hover:text-primary transition-colors cursor-pointer",
-                                        "Sabin Regmi"
+                                        "Rohan Kotwani"
                                     }
                                 }
                                 if !is_blog {

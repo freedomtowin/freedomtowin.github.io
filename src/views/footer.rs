@@ -14,7 +14,7 @@ pub fn Footer() -> Element {
 
                     div { class: "space-y-4",
                         h3 { class: "text-xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-gray-100 to-gray-400",
-                            "Sabin Regmi"
+                            "Rohan Kotwani"
                         }
                         p { class: "text-gray-400", "I will update this section soon !!!" }
                     }
@@ -57,17 +57,17 @@ pub fn Footer() -> Element {
                         div { class: "flex space-x-4",
                             a {
                                 class: "text-gray-400 hover:text-white transition-colors",
-                                href: "https://github.com/wheregmis",
+                                href: "https://github.com/freedomtowin",
                                 i { class: "fab fa-github text-xl" }
                             }
                             a {
                                 class: "text-gray-400 hover:text-white transition-colors",
-                                href: "https://twitter.com/wheregmis",
+                                href: "https://twitter.com/freedomtowin",
                                 i { class: "fab fa-twitter text-xl" }
                             }
                             a {
                                 class: "text-gray-400 hover:text-white transition-colors",
-                                href: "https://linkedin.com/in/wheregmis",
+                                href: "https://linkedin.com/in/freedomtowin",
                                 i { class: "fab fa-linkedin text-xl" }
                             }
                         }
@@ -75,7 +75,7 @@ pub fn Footer() -> Element {
                 }
                 // Copyright
                 div { class: "mt-12 pt-8 border-t border-gray-800 text-center text-gray-400",
-                    "© 2024 Sabin Regmi"
+                    "© 2025 Rohan Kotwani"
                     div { class: "text-center text-gray-400",
                         "Built with ❤️ using Dioxus"
                     }

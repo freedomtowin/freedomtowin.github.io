@@ -170,4 +170,4 @@ fn AnimatedFlower() -> Element {
 ## Conclusion
 dioxus-motion represents a significant step forward for animation capabilities in the Rust ecosystem. While we've achieved our initial goals of creating a robust, physics-based animation system, this is just the beginning. We're excited to see how the community will use and enhance these tools to create more dynamic and engaging user interfaces.
 
-Ready to start animating? Visit our [GitHub repository](https://github.com/wheregmis/dioxus-motion) to contribute or try it out!
+Ready to start animating? Visit our [GitHub repository](https://github.com/freedomtowin/dioxus-motion) to contribute or try it out!

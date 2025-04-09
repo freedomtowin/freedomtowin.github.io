@@ -1472,6 +1472,20 @@ dependencies = [
 ]
 
 [[package]]
+name = "freedomtowin"
+version = "0.1.0"
+dependencies = [
+ "dioxus",
+ "dioxus-logger",
+ "dioxus-motion",
+ "easer",
+ "include_dir",
+ "pulldown-cmark",
+ "serde",
+ "toml",
+]
+
+[[package]]
 name = "futf"
 version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4646,20 +4660,6 @@ dependencies = [
  "thiserror",
  "windows",
  "windows-core",
-]
-
-[[package]]
-name = "wheregmis"
-version = "0.1.0"
-dependencies = [
- "dioxus",
- "dioxus-logger",
- "dioxus-motion",
- "easer",
- "include_dir",
- "pulldown-cmark",
- "serde",
- "toml",
 ]
 
 [[package]]
