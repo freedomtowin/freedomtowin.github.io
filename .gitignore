@@ -1,5 +1,6 @@
 /target
 /dist
 .cargo
-/TMP
-TMP/
+/tmp
+tmp/*
+tmp
