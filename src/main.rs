@@ -94,10 +94,6 @@ fn Home() -> Element {
                 },
                 BlogPreview {}
             }
-
-            // Testimonials
-            div { Testimonials {} }
-
             // Footer
             div { Footer {} }
         }
