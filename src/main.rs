@@ -63,7 +63,7 @@ fn Home() -> Element {
         document::Link { rel: "icon", href: FAVICON }
         div {
 
-           class: "min-h-screen bg-background text-text-primary",
+           class: "min-h-screen bg-background text-text-primary overflow-x-hidden",
 
             // Main container
             // Hero/Profile section
