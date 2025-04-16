@@ -63,7 +63,7 @@ fn Home() -> Element {
         document::Link { rel: "icon", href: FAVICON }
         div {
 
-           class: "min-h-screen bg-background text-text-primary overflow-x-hidden",
+           class: "min-h-screen bg-background text-text-primary",
 
             // Main container
             // Hero/Profile section
@@ -81,13 +81,13 @@ fn Home() -> Element {
                 WorkExperience {}
             }
 
-            // // Project Grid
-            // div {
-            //     onmounted: move |data| {
-            //         *PROJECT_GRID.write() = Some(data);
-            //     },
-            //     ProjectGrid {}
-            // }
+            // Project Grid
+            div {
+                onmounted: move |data| {
+                    *PROJECT_GRID.write() = Some(data);
+                },
+                ProjectGrid {}
+            }
 
             // // Blog Preview
             // div {

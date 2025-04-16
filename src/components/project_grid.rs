@@ -3,33 +3,35 @@ use dioxus_motion::prelude::*;
 use easer::functions::Easing;
 use std::time::Duration;
 
+const TARIFF_TRACKER: Asset = asset!("/assets/tariff_tracker.png");
+
 #[component]
 pub fn ProjectGrid() -> Element {
     rsx! {
         div { id: "projects", class: "container mx-auto px-4 py-12",
             // Section header
-            h2 { class: "text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 mb-2",
-                "Featured Projects"
+            h2 { class: "text-3xl font-bold bg-clip-text txt-purple-rk mb-2",
+                "Rust Cross-Platform Application Development"
             }
-            p { class: "text-gray-400 mb-8",
-                "Some things I've built to make the world a better place"
+            p { class: "txt-purple-rk mb-8",
+                "A collection of live documents that track my development progress in various cross-platform dioxus applications."
             }
             // Project grid with fixed card sizes
             div { class: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6",
                 ProjectCard {
-                    title: "Dioxus Motion 🚀",
-                    description: "A lightweight, cross-platform animation library for Dioxus, designed to bring smooth, flexible animations to your Rust web, desktop, and mobile applications.",
-                    image: "https://devpro-aceternity.vercel.app/_next/image?url=%2Fimages%2Fprojects%2Falgochurn.png&w=3840&q=75",
-                    tech_stack: vec!["Rust", "Dioxus", "Tailwind"],
-                    link: "https://crates.io/crates/dioxus-motion",
+                    title: "[Rust, Golang, AWS] Tariff Tracker Web App",
+                    description: "A web app tariff tracker will collects new news articles daily, aggregate weekly and summarizes them, then serve them in a protected web app with authentication.",
+                    image: TARIFF_TRACKER,
+                    tech_stack: vec!["Rust", "Dioxus", "Golang", "AWS"],
+                    link: "https://medium.com/lazy-by-design/tariff-tracker-rust-web-app-6f5192f93f88",
                 }
-                ProjectCard {
-                    title: "HTML to RSX Converter",
-                    description: "Convert HTML to Dioxus RSX with a single click. A simple yet powerful tool built with Rust and Dioxus.",
-                    image: "https://devpro-aceternity.vercel.app/_next/image?url=%2Fimages%2Fprojects%2Falgochurn.png&w=3840&q=75",
-                    tech_stack: vec!["Rust", "Dioxus", "Tailwind"],
-                    link: "https://wheregmis.github.io/dioxus_html_rsx/",
-                }
+                // ProjectCard {
+                //     title: "HTML to RSX Converter",
+                //     description: "Convert HTML to Dioxus RSX with a single click. A simple yet powerful tool built with Rust and Dioxus.",
+                //     image: "https://devpro-aceternity.vercel.app/_next/image?url=%2Fimages%2Fprojects%2Falgochurn.png&w=3840&q=75",
+                //     tech_stack: vec!["Rust", "Dioxus", "Tailwind"],
+                //     link: "https://wheregmis.github.io/dioxus_html_rsx/",
+                // }
 
             }
         }
@@ -149,7 +151,7 @@ fn ProjectCard(props: ProjectCardProps) -> Element {
     rsx! {
         a { href: "{props.link}", target: "_blank",
             div {
-                class: "group h-[400px] flex flex-col relative overflow-hidden rounded-xl bg-surface/50 border border-surface-light/20 transition-all duration-300 hover:bg-surface-hover hover:border-surface-light/40 hover:shadow-xl hover:shadow-primary/20",
+                class: "group h-[400px] flex flex-col relative overflow-hidden rounded-xl bg-dark-purple-rk border border-surface-light/20 transition-all duration-300 hover:border-surface-light/40 hover:shadow-xl hover:shadow-primary/20",
                 style: "transform: translateY({card_transform.get_value().y}px) scale({card_transform.get_value().scale}); opacity: {card_opacity.get_value()};",
                 // Image container
                 div {
@@ -167,12 +169,12 @@ fn ProjectCard(props: ProjectCardProps) -> Element {
                 // Content container
                 div { class: "flex flex-col flex-1 p-6 h-[200px]",
                     h3 {
-                        class: "text-lg font-semibold text-text-primary group-hover:text-primary transition-colors line-clamp-1 mb-2",
+                        class: "text-lg font-semibold txt-gold-rk group-hover:text-primary transition-colors line-clamp-4 mb-2",
                         style: "transform: translateX({title_transform.get_value().x}px) scale({title_transform.get_value().scale});",
                         "{props.title}"
                     }
                     p {
-                        class: "text-sm text-text-secondary line-clamp-3 mb-4",
+                        class: "text-sm txt-gray-blue-rk line-clamp-4 mb-4",
                         style: "transform: translateX({desc_transform.get_value().x}px) scale({desc_transform.get_value().scale});",
                         "{props.description}"
                     }
@@ -203,7 +205,7 @@ fn ProjectCard(props: ProjectCardProps) -> Element {
                                     });
                                     rsx! {
                                         span {
-                                            class: "px-3 py-1 text-xs rounded-full bg-surface text-text-secondary",
+                                            class: "px-3 py-1 text-xs rounded-full bg-dark-purple-rk text-text-secondary",
                                             style: "transform: translateY({tech_transform.get_value().y}px) scale({tech_transform.get_value().scale}); opacity: {tech_transform.get_value().scale};",
                                             "{tech}"
                                         }

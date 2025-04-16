@@ -1,7 +1,4 @@
 /*! tailwindcss v4.0.10 | MIT License | https://tailwindcss.com */
-.invisible {
-  visibility: hidden;
-}
 .visible {
   visibility: visible;
 }
@@ -23,14 +20,14 @@
 .top-1\/2 {
   top: calc(1/2 * 100%);
 }
+.top-1\/4 {
+  top: calc(1/4 * 100%);
+}
 .-left-\[3px\] {
   left: calc(3px * -1);
 }
 .-left-\[25px\] {
   left: calc(25px * -1);
-}
-.isolate {
-  isolation: isolate;
 }
 .z-10 {
   z-index: 10;
@@ -65,8 +62,11 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
 }
-.\!flex {
-  display: flex !important;
+.line-clamp-4 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
 }
 .block {
   display: block;
@@ -104,9 +104,6 @@
 .h-\[400px\] {
   height: 400px;
 }
-.h-\[calc\(100\%-2rem\)\] {
-  height: calc(100% - 2rem);
-}
 .h-full {
   height: 100%;
 }
@@ -140,6 +137,9 @@
 .grow {
   flex-grow: 1;
 }
+.border-collapse {
+  border-collapse: collapse;
+}
 .-translate-y-1\/2 {
   --tw-translate-y: calc(calc(1/2 * 100%) * -1);
   translate: var(--tw-translate-x) var(--tw-translate-y);
@@ -158,9 +158,6 @@
 }
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
-}
-.grid-cols-\[1px_200px_1fr\] {
-  grid-template-columns: 1px 200px 1fr;
 }
 .flex-col {
   flex-direction: column;
@@ -187,6 +184,9 @@
 }
 .overflow-hidden {
   overflow: hidden;
+}
+.overflow-x-hidden {
+  overflow-x: hidden;
 }
 .rounded-full {
   border-radius: calc(infinity * 1px);
@@ -235,17 +235,8 @@
 .text-center {
   text-align: center;
 }
-.text-justify {
-  text-align: justify;
-}
-.text-wrap {
-  text-wrap: wrap;
-}
 .text-transparent {
   color: transparent;
-}
-.capitalize {
-  text-transform: capitalize;
 }
 .lowercase {
   text-transform: lowercase;
@@ -256,9 +247,8 @@
 .italic {
   font-style: italic;
 }
-.ordinal {
-  --tw-ordinal: ordinal;
-  font-variant-numeric: var(--tw-ordinal,) var(--tw-slashed-zero,) var(--tw-numeric-figure,) var(--tw-numeric-spacing,) var(--tw-numeric-fraction,);
+.underline {
+  text-decoration-line: underline;
 }
 .opacity-0 {
   opacity: 0%;
@@ -273,6 +263,10 @@
 }
 .filter {
   filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
+}
+.backdrop-filter {
+  -webkit-backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
+  backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
 }
 .transition {
   transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter;
@@ -305,9 +299,6 @@
 .duration-500 {
   --tw-duration: 500ms;
   transition-duration: 500ms;
-}
-.\[https\:\/\/serde\.rs\/derive\.html\] {
-  https: //serde.rs/derive.html;
 }
 .group-hover\:w-full {
   &:is(:where(.group):hover *) {
@@ -396,26 +387,6 @@
   inherits: false;
   initial-value: solid;
 }
-@property --tw-ordinal {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-slashed-zero {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-numeric-figure {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-numeric-spacing {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-numeric-fraction {
-  syntax: "*";
-  inherits: false;
-}
 @property --tw-outline-style {
   syntax: "*";
   inherits: false;
@@ -458,6 +429,42 @@
   inherits: false;
 }
 @property --tw-drop-shadow {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-blur {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-brightness {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-contrast {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-grayscale {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-hue-rotate {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-invert {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-opacity {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-saturate {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-sepia {
   syntax: "*";
   inherits: false;
 }

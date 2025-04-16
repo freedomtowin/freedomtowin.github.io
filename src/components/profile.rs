@@ -86,7 +86,7 @@ pub fn Profile() -> Element {
 
         rsx! {
             p {
-                class: "text-text-muted leading-relaxed flex items-center space-x-2",
+                class: "leading-relaxed flex items-center txt-gray-blue-rk space-x-2",
                 style: "opacity: {opacity.get_value()};",
                 span { class: "text-primary", "•" }
                 span { "{points_labels[i]}" }
@@ -96,9 +96,9 @@ pub fn Profile() -> Element {
 
     rsx! {
         div { class: "container mx-auto px-4 pt-20",
-            div { class: "relative overflow-hidden rounded-xl bg-gradient-to-br from-surface via-surface-dark to-surface p-8 border border-surface-light",
+            div { class: "relative overflow-hidden rounded-lg p-8 border border-surface-light",
                 // Gradient overlay
-                div { class: "absolute inset-0 bg-gradient-to-br from-primary/10 via-accent-purple/10 to-secondary/10" }
+                div { class: "absolute inset-0 bg-dark-purple-rk" }
     
                 // Content container (no wrap, allow text to flex)
                 div { class: "relative z-10 flex items-start justify-between gap-8 lg:flex-nowrap",
@@ -109,12 +109,12 @@ pub fn Profile() -> Element {
                         style: "transform: translateX({content_transform.get_value().x}px) scale({content_transform.get_value().scale}); opacity: {content_opacity.get_value()};",
                         
                         // Heading
-                        h1 { class: "text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-light to-accent-purple",
+                        h1 { class: "text-4xl font-bold bg-clip-text text-transparent bg-gold-rk",
                             "AI Data Engineer"
                         }
     
                         // Main description
-                        p { class: "mt-4 text-xl text-text-secondary leading-relaxed",
+                        p { class: "mt-4 text-xl leading-relaxed txt-gray-blue-rk",
                             "Using Generative AI and Data Engineering to Build Fantastic Apps"
                         }
     

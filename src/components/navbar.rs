@@ -17,7 +17,7 @@ pub fn NavBar() -> Element {
                     div { class: "flex items-center justify-between h-full",
                         // Left side - Logo and name
                         div { class: "flex items-center space-x-3",
-                            div { class: "flex items-center gap-8 px-6 py-2 bg-surface/50 backdrop-blur-sm border border-surface-light/10 rounded-full shadow-lg shadow-background/5",
+                            div { class: "flex items-center gap-8 px-6 py-2 bg-dark-purple-rk backdrop-blur-sm border border-surface-light/10 rounded-full shadow-lg shadow-background/5",
                                 svg {
                                     class: "w-8 h-8 text-text-secondary",
                                     xmlns: "http://www.w3.org/2000/svg",
@@ -41,13 +41,13 @@ pub fn NavBar() -> Element {
                                             }
                                         }
                                     },
-                                    h1 { class: "text-lg font-semibold text-text-primary hover:text-primary transition-colors cursor-pointer",
+                                    h1 { class: "text-lg font-semibold txt-gray-blue-rk hover:text-primary transition-colors cursor-pointer",
                                         "Rohan Kotwani"
                                     }
                                 }
                                 if !is_blog {
                                     nav { class: "hidden md:flex items-center space-x-6",
-                                        for link in ["Experience", "Projects", "Blogs"].iter() {
+                                        for link in ["Experience", "Rust Cross-Platform Application Development", "Blogs"].iter() {
                                             a {
                                                 class: "text-sm text-text-secondary hover:text-text-primary transition-colors relative group cursor-pointer",
                                                 onclick: move |_| async move {
@@ -57,7 +57,7 @@ pub fn NavBar() -> Element {
                                                                 let _ = header.scroll_to(ScrollBehavior::Smooth).await;
                                                             }
                                                         }
-                                                        "Projects" => {
+                                                        "Rust Cross-Platform Application Development" => {
                                                             if let Some(header) = PROJECT_GRID.cloned() {
                                                                 let _ = header.scroll_to(ScrollBehavior::Smooth).await;
                                                             }

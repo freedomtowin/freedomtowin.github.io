@@ -5,7 +5,7 @@ use crate::{BLOG_PREVIEW, PROFILE_ELEMENT, PROJECT_GRID, WORKEXPERIENCE};
 #[component]
 pub fn Footer() -> Element {
     rsx! {
-        footer { class: "w-full mt-auto bg-gradient-to-t from-black to-bg-background border-t border-surface-light/20",
+        footer { class: "w-full mt-auto bg-gradient-to-t from-purple-400 to-bg-background border-t bg-background",
             div { class: "container mx-auto px-4 py-12",
                 // create a divider for the footer
                 div { class: "border-b border-surface-light/50 mb-12" }
@@ -13,18 +13,18 @@ pub fn Footer() -> Element {
                     // Logo and description
 
                     div { class: "space-y-4",
-                        h3 { class: "text-xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-gray-100 to-gray-400",
+                        h3 { class: "text-xl font-semibold txt-black-rk",
                             "Rohan Kotwani"
                         }
-                        p { class: "text-gray-400", "I will update this section soon !!!" }
+                        p { class: "txt-black-rk", "I will update this section soon !!!" }
                     }
                     // Quick links
                     div { class: "space-y-4",
-                        h4 { class: "text-white font-medium", "Quick Links" }
+                        h4 { class: "txt-black-rk font-medium", "Quick Links" }
                         div { class: "flex flex-col space-y-2",
                             for link in ["About", "Projects", "Blogs"].iter() {
                                 a {
-                                    class: "text-sm text-text-secondary hover:text-text-primary transition-colors relative group cursor-pointer",
+                                    class: "text-sm txt-black-rk hover:text-text-primary transition-colors relative group cursor-pointer",
                                     onclick: move |_| async move {
                                         match *link {
                                             "About" => {
@@ -53,20 +53,20 @@ pub fn Footer() -> Element {
                     }
                     // Social links
                     div { class: "space-y-4",
-                        h4 { class: "text-white font-medium", "Connect" }
+                        h4 { class: "txt-black-rk font-medium", "Connect" }
                         div { class: "flex space-x-4",
                             a {
-                                class: "text-gray-400 hover:text-white transition-colors",
+                                class: "txt-black-rk hover:text-white transition-colors",
                                 href: "https://github.com/freedomtowin",
                                 i { class: "fab fa-github text-xl" }
                             }
                             a {
-                                class: "text-gray-400 hover:text-white transition-colors",
+                                class: "txt-black-rk hover:text-white transition-colors",
                                 href: "https://twitter.com/freedomtowin",
                                 i { class: "fab fa-twitter text-xl" }
                             }
                             a {
-                                class: "text-gray-400 hover:text-white transition-colors",
+                                class: "txt-black-rk hover:text-white transition-colors",
                                 href: "https://linkedin.com/in/freedomtowin",
                                 i { class: "fab fa-linkedin text-xl" }
                             }
@@ -74,9 +74,9 @@ pub fn Footer() -> Element {
                     }
                 }
                 // Copyright
-                div { class: "mt-12 pt-8 border-t border-gray-800 text-center text-gray-400",
+                div { class: "mt-12 pt-8 border-t border-gray-800 text-center txt-gray-blue-rk",
                     "© 2025 Rohan Kotwani"
-                    div { class: "text-center text-gray-400",
+                    div { class: "text-center txt-gray-blue-rk",
                         "Built with ❤️ using Dioxus"
                     }
                 }

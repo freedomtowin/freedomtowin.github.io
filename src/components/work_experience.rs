@@ -76,15 +76,15 @@ pub fn WorkExperience() -> Element {
                     animate_details(());
                 },
                 div {
-                    class: "absolute -left-[25px] top-1/2 -translate-y-1/2 w-4 h-4 rounded-full border-2 hidden md:block",
-                    class: if selected_company() == index { "bg-blue-500 border-blue-400" } else { "bg-gray-800 border-gray-700" },
+                    class: "absolute -left-[25px] top-1/4 -translate-y-1/2 w-4 h-4 rounded-full hidden md:block",
+                    class: if selected_company() == index { "bg-purple-rk" } else { "bg-purple-rk" },
                     style: "transform: scale({point_transform.get_value().scale});",
                 }
                 div {
                     class: "p-4 rounded-lg transition-colors duration-300",
-                    class: if selected_company() == index { "bg-surface/50" } else { "bg-transparent" },
-                    h3 { class: "font-medium text-text-primary", "{company}" }
-                    p { class: "text-sm text-text-muted", "{duration}" }
+                    class: if selected_company() == index { "bg-surface-gold-rk" } else { "bg-surface-gold-rk/50" },
+                    h3 { class: "font-medium txt-dark-purple-rk", "{company}" }
+                    p { class: "text-sm txt-dark-purple-rk", "{duration}" }
                 }
             }
         }
@@ -95,10 +95,10 @@ pub fn WorkExperience() -> Element {
         let description_split = description.split("\n");
         rsx! {
             div { class: "space-y-4",
-                h3 { class: "text-xl font-semibold text-white", "{title}" }
-                p { class: "text-gray-400", "{duration}" }
+                h3 { class: "text-xl font-semibold txt-gold-rk", "{title}" }
+                p { class: "txt-gray-blue-rk", "{duration}" }
                 {description_split.into_iter().map(|content| {
-                    rsx! { p { class: "text-gray-300 leading-relaxed", "{content}" } }
+                    rsx! { p { class: "txt-gray-blue-rk leading-relaxed", "{content}" } }
                 })}
                 div { class: "flex flex-wrap gap-2",
                     {tech_stack.iter().enumerate().map(|(index, tech)| {
@@ -110,7 +110,7 @@ pub fn WorkExperience() -> Element {
                         });
                         rsx! {
                             span {
-                                class: "px-3 py-1 text-xs rounded-full bg-gray-800 text-gray-300",
+                                class: "px-3 py-1 text-xs rounded-full bg-pruple-rk txt-gold-rk",
                                 style: "transform: translate({tech_transform.get_value().x}px, {tech_transform.get_value().y}px) scale({tech_transform.get_value().scale}) rotate({tech_transform.get_value().rotation}deg);",
                                 onmounted: move |_| async move {
                                     let delay = Duration::from_millis((200 + index as u64 * 100));
@@ -136,7 +136,7 @@ pub fn WorkExperience() -> Element {
 
     rsx! {
         div { id: "experience", class: "container mx-auto px-4 py-12 overflow-x-hidden",
-            h2 { class: "text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 mb-8",
+            h2 { class: "text-3xl font-bold bg-clip-text text-transparent bg-purple-rk mb-8",
                 "Work Experience"
             }
             div { class: "flex flex-col md:flex-row gap-6 md:gap-8",
@@ -163,7 +163,7 @@ pub fn WorkExperience() -> Element {
                 div { class: "w-full md:w-1/4 space-y-8 pl-4", {companies_comp} }
                 div {
                     id: "experience-details",
-                    class: "w-full md:w-3/4 bg-gray-900/50 rounded-xl p-6 border border-gray-800",
+                    class: "w-full md:w-3/4 bg-dark-purple-rk rounded-xl p-6 border border-gray-800",
                     style: "transform: scale({details_transform.get_value().scale});",
                     onmounted: move |_| {
                         details_transform.animate_to(
