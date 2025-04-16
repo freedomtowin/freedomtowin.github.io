@@ -11,15 +11,15 @@ pub fn NavBar() -> Element {
     let is_blog = path.to_string().starts_with("/blo");
 
     rsx! {
-        div { class: "w-full h-full bg-background text-text-secondary",
+        div { class: "w-full h-full bg-background txt-gold-rk",
             header { class: "fixed top-0 w-full z-50 h-16 backdrop-blur-md border-b border-surface-light/20",
                 div { class: "container mx-auto h-full px-4",
                     div { class: "flex items-center justify-between h-full",
                         // Left side - Logo and name
                         div { class: "flex items-center space-x-3",
-                            div { class: "flex items-center gap-8 px-6 py-2 bg-dark-purple-rk backdrop-blur-sm border border-surface-light/10 rounded-full shadow-lg shadow-background/5",
+                            div { class: "flex items-center gap-8 px-6 py-2 bg-purple-rk backdrop-blur-sm border border-surface-light/10 rounded-full shadow-lg shadow-background/5",
                                 svg {
-                                    class: "w-8 h-8 text-text-secondary",
+                                    class: "w-8 h-8 txt-gold-rk",
                                     xmlns: "http://www.w3.org/2000/svg",
                                     fill: "none",
                                     "stroke-width": "1.5",
@@ -41,7 +41,7 @@ pub fn NavBar() -> Element {
                                             }
                                         }
                                     },
-                                    h1 { class: "text-lg font-semibold txt-gray-blue-rk hover:text-primary transition-colors cursor-pointer",
+                                    h1 { class: "text-lg font-semibold txt-gray-blue-rk hover:txt-gold-rk transition-colors cursor-pointer",
                                         "Rohan Kotwani"
                                     }
                                 }
@@ -49,7 +49,7 @@ pub fn NavBar() -> Element {
                                     nav { class: "hidden md:flex items-center space-x-6",
                                         for link in ["Experience", "Rust Cross-Platform Application Development", "Blogs"].iter() {
                                             a {
-                                                class: "text-sm text-text-secondary hover:text-text-primary transition-colors relative group cursor-pointer",
+                                                class: "text-sm txt-gray-blue-rk hover:txt-gold-rktransition-colors relative group cursor-pointer",
                                                 onclick: move |_| async move {
                                                     match *link {
                                                         "Experience" => {
