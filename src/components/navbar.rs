@@ -17,7 +17,7 @@ pub fn NavBar() -> Element {
                     div { class: "flex items-center justify-between h-full",
                         // Left side - Logo and name
                         div { class: "flex items-center space-x-3",
-                            div { class: "flex items-center gap-8 px-6 py-2 bg-purple-rk backdrop-blur-sm border border-surface-light/10 rounded-full shadow-lg shadow-background/5",
+                            div { class: "flex items-center gap-8 px-6 py-2 bg-gray-blue-rk backdrop-blur-sm border border-surface-light/10 rounded-full shadow-lg shadow-background/5",
                                 svg {
                                     class: "w-8 h-8 txt-gold-rk",
                                     xmlns: "http://www.w3.org/2000/svg",
@@ -41,7 +41,7 @@ pub fn NavBar() -> Element {
                                             }
                                         }
                                     },
-                                    h1 { class: "text-lg font-semibold txt-gray-blue-rk hover:txt-gold-rk transition-colors cursor-pointer",
+                                    h1 { class: "text-lg font-semibold txt-purple-rk hover:txt-gold-rk transition-colors cursor-pointer",
                                         "Rohan Kotwani"
                                     }
                                 }
@@ -49,7 +49,7 @@ pub fn NavBar() -> Element {
                                     nav { class: "hidden md:flex items-center space-x-6",
                                         for link in ["Experience", "Rust Cross-Platform Application Development", "Blogs"].iter() {
                                             a {
-                                                class: "text-sm txt-gray-blue-rk hover:txt-gold-rktransition-colors relative group cursor-pointer",
+                                                class: "text-sm txt-purple-rk hover:txt-gold-rktransition-colors relative group cursor-pointer",
                                                 onclick: move |_| async move {
                                                     match *link {
                                                         "Experience" => {
