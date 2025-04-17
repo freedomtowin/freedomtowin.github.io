@@ -77,8 +77,8 @@ pub fn ExpandableBar(props: ExpandableBarProps) -> Element {
             // Header and toggle button
             div {
                 class: "deepdiveheader",
-                h2 {
-                    class: "deepdiveheader-title p-4",
+                h3 {
+                    class: "deepdiveheader-title",
                     "Resource Links"
                 }
                 button {
