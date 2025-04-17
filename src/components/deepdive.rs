@@ -52,6 +52,8 @@ pub fn DeepDiveBlogList() -> Element {
     }
 }
 
+use dioxus::prelude::*;
+
 #[derive(Clone, PartialEq, Props)]
 pub struct ExpandableBarProps {
     items: Vec<(String, String, String)>, // (title, subtitle, url)
@@ -62,87 +64,47 @@ pub fn ExpandableBar(props: ExpandableBarProps) -> Element {
     // State to control the expansion of the bar
     let mut is_expanded = use_signal(|| false);
 
-    // Animation for the bar's height
-    let mut bar_height = use_motion(0.0f32);
-    let mut bar_opacity = use_motion(0.0f32);
-
-    // Animation for the container's border and shadow
-    let mut container_transform = use_motion(Transform::new(0.0, 20.0, 0.9, 0.0));
-
-    // Calculate dynamic height based on number of items (approximate)
-    let item_height = 65.0; // Approximate height per item
-    let padding = 48.0; // Account for padding (p-6 = 24px top + bottom)
-    let target_height = if props.items.is_empty() {
-        2.0
-    } else {
-        (props.items.len() as f32 * item_height) + padding
-    };
-
-    // Toggle expansion and animate
+    // Toggle expansion
     let toggle_expansion = move |_| {
         let expand_status = *is_expanded.read();
         is_expanded.set(!expand_status);
-        let target_height = if *is_expanded.read() { target_height } else { 0.0 };
-        let target_opacity = if *is_expanded.read() { 1.0 } else { 0.0 };
-
-        bar_height.animate_to(
-            target_height,
-            AnimationConfig::new(AnimationMode::Spring(Spring {
-                stiffness: 100.0,
-                damping: 15.0,
-                mass: 1.0,
-                velocity: 0.0,
-            })),
-        );
-
-        bar_opacity.animate_to(
-            target_opacity,
-            AnimationConfig::new(AnimationMode::Tween(Tween {
-                duration: Duration::from_millis(400),
-                easing: easer::functions::Sine::ease_in_out,
-            })),
-        );
-
-        container_transform.animate_sequence(
-            AnimationSequence::new().then(
-                Transform::identity(),
-                AnimationConfig::new(AnimationMode::Spring(Spring {
-                    stiffness: 120.0,
-                    damping: 12.0,
-                    mass: 1.0,
-                    velocity: 0.0,
-                }))
-                .with_delay(Duration::from_millis(200)),
-            ),
-        );
+        println!("Toggling: is_expanded = {}", *is_expanded.read());
     };
 
     rsx! {
         div {
-            class: "px-4 py-6",
+            class: "deepdiveexpandable-bar",
             // Header and toggle button
             div {
-                class: "flex justify-between items-center mb-4",
+                class: "deepdiveheader",
+                h2 {
+                    class: "deepdiveheader-title p-4",
+                    "Resource Links"
+                }
                 button {
+                    class: "deepdivetoggle-button",
                     onclick: toggle_expansion,
-                    class: "px-6 py-3 text-xl rounded-full bg-dark-purple-rk bg-gray-800 text-text-secondary text-gray-300 hover:bg-primary hover:bg-blue-600 hover:text-dark-purple-rk hover:text-gray-900 transition-colors duration-300",
                     if *is_expanded.read() { "Collapse" } else { "Expand" }
                 }
             }
             // Expandable content
             div {
-                class: "rounded-xl bg-dark-purple-rk border border-surface-light/20 transition-all duration-300 hover:border-surface-light/40 hover:shadow-xl hover:shadow-primary/20",
-                style: "height: {bar_height.get_value()}px; transform: translateY({container_transform.get_value().y}px) scale({container_transform.get_value().scale}); opacity: {bar_opacity.get_value()};",
+                class: "deepdiveexpandable-content",
+                style: if *is_expanded.read() { "max-height: 500px;" } else { "max-height: 0px;" },
                 div {
-                    class: "p-6",
-                    for (index, (title, subtitle, url)) in props.items.iter().enumerate() {
-                        LinkItem {
-                            key: "{index}", // Ensures stable rendering
-                            title: title.clone(),
-                            subtitle: subtitle.clone(),
-                            url: url.clone(),
-                            index: index,
-                            is_visible: *is_expanded.read()
+                    class: "deepdivecontent-inner",
+                    if props.items.is_empty() {
+                        p { class: "empty-message", "No items to display" }
+                    } else {
+                        for (index, (title, subtitle, url)) in props.items.iter().enumerate() {
+                            LinkItem {
+                                key: "{index}",
+                                title: title.clone(),
+                                subtitle: subtitle.clone(),
+                                url: url.clone(),
+                                index: index,
+                                is_visible: *is_expanded.read()
+                            }
                         }
                     }
                 }
@@ -166,7 +128,7 @@ fn LinkItem(props: LinkItemProps) -> Element {
     rsx! {
         div {
             class: "mb-4 last:mb-0",
-            style: "",
+            style: if props.is_visible { "display:block; max-height: 100px; overflow: hidden;" } else { "display: none; max-height: 65px; overflow: hidden;"},
             a {
                 href: "{props.url}",
                 target: "_blank",

@@ -50,6 +50,9 @@
 .ml-auto {
   margin-left: auto;
 }
+.box-border {
+  box-sizing: border-box;
+}
 .line-clamp-1 {
   overflow: hidden;
   display: -webkit-box;
@@ -112,6 +115,12 @@
 }
 .h-full {
   height: 100%;
+}
+.max-h-\[500px\] {
+  max-height: 500px;
+}
+.min-h-\[200px\] {
+  min-height: 200px;
 }
 .min-h-screen {
   min-height: 100vh;
@@ -193,6 +202,9 @@
 }
 .overflow-x-hidden {
   overflow-x: hidden;
+}
+.overflow-y-auto {
+  overflow-y: auto;
 }
 .rounded-full {
   border-radius: calc(infinity * 1px);
