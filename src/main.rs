@@ -1,6 +1,6 @@
 #![allow(non_snake_case)]
 
-use components::{NavBar, Profile, ProjectGrid, WorkExperience};
+use components::{NavBar, Profile, ProjectGrid, WorkExperience, DeepDiveBlogList};
 use dioxus::prelude::*;
 use dioxus_logger::tracing::Level;
 
@@ -89,13 +89,13 @@ fn Home() -> Element {
                 ProjectGrid {}
             }
 
-            // // Blog Preview
-            // div {
-            //     onmounted: move |data| {
-            //         *BLOG_PREVIEW.write() = Some(data);
-            //     },
-            //     BlogPreview {}
-            // }
+            // Blog Preview
+            div {
+                onmounted: move |data| {
+                    *BLOG_PREVIEW.write() = Some(data);
+                },
+                DeepDiveBlogList {}
+            }
             // Footer
             div { Footer {} }
         }

@@ -13,3 +13,6 @@ pub use navbar::NavBar;
 
 mod project_grid;
 pub use project_grid::ProjectGrid;
+
+mod deepdive;
+pub use deepdive::DeepDiveBlogList;

@@ -47,7 +47,7 @@ pub fn NavBar() -> Element {
                                 }
                                 if !is_blog {
                                     nav { class: "hidden md:flex items-center space-x-6",
-                                        for link in ["Experience", "Rust Cross-Platform Application Development", "Blogs"].iter() {
+                                        for link in ["Experience", "Rust Development", "Technical Blog"].iter() {
                                             a {
                                                 class: "text-sm txt-purple-rk hover:txt-gold-rktransition-colors relative group cursor-pointer",
                                                 onclick: move |_| async move {
@@ -57,12 +57,12 @@ pub fn NavBar() -> Element {
                                                                 let _ = header.scroll_to(ScrollBehavior::Smooth).await;
                                                             }
                                                         }
-                                                        "Rust Cross-Platform Application Development" => {
+                                                        "Rust Development" => {
                                                             if let Some(header) = PROJECT_GRID.cloned() {
                                                                 let _ = header.scroll_to(ScrollBehavior::Smooth).await;
                                                             }
                                                         }
-                                                        "Blogs" => {
+                                                        "Technical Blog" => {
                                                             if let Some(header) = BLOG_PREVIEW.cloned() {
                                                                 let _ = header.scroll_to(ScrollBehavior::Smooth).await;
                                                             }
