@@ -16,3 +16,6 @@ pub use project_grid::ProjectGrid;
 
 mod deepdive;
 pub use deepdive::DeepDiveBlogList;
+
+mod education;
+pub use education::Education;

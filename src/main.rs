@@ -1,6 +1,6 @@
 #![allow(non_snake_case)]
 
-use components::{NavBar, Profile, ProjectGrid, WorkExperience, DeepDiveBlogList};
+use components::{NavBar, Profile, ProjectGrid, WorkExperience, DeepDiveBlogList, Education};
 use dioxus::prelude::*;
 use dioxus_logger::tracing::Level;
 
@@ -24,6 +24,7 @@ const FAVICON: Asset = asset!("/assets/favicon.ico");
 pub const PROFILE_PIC: Asset = asset!("/assets/1152300.png");
 pub const MOTION_PIC: Asset = asset!("/assets/dioxus-motion.png");
 pub const HTML_RSX_PIC: Asset = asset!("/assets/html-rsx.png");
+pub const STYLES_CSS: Asset = asset!("/assets/styles.css");
 
 fn main() {
     dioxus_logger::init(Level::INFO).expect("failed to init logger");
@@ -39,6 +40,11 @@ fn App() -> Element {
             rel: "stylesheet",
             href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css",
         }
+        
+        document::Link {
+            rel: "stylesheet",
+            href: STYLES_CSS,
+        }
 
         Router::<Route> {}
     }
@@ -53,6 +59,9 @@ pub static WORKEXPERIENCE: GlobalSignal<
 pub static PROJECT_GRID: GlobalSignal<Option<dioxus::prelude::Event<dioxus::events::MountedData>>> =
     Global::new(|| None);
 pub static BLOG_PREVIEW: GlobalSignal<Option<dioxus::prelude::Event<dioxus::events::MountedData>>> =
+    Global::new(|| None);
+
+pub static EDUCATION: GlobalSignal<Option<dioxus::prelude::Event<dioxus::events::MountedData>>> =
     Global::new(|| None);
 
 // Home component - Main landing page container
@@ -79,6 +88,14 @@ fn Home() -> Element {
                     *WORKEXPERIENCE.write() = Some(data);
                 },
                 WorkExperience {}
+            }
+
+            div {
+                onmounted: move |data| {
+                    *EDUCATION.write() = Some(data);
+                },
+                Education {}
+
             }
 
             // Project Grid
