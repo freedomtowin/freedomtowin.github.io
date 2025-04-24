@@ -213,7 +213,7 @@ pub fn Education() -> Element {
 
                         rsx! {
                             div { class: "space-y-4",
-                                h3 { class: "text-xl font-semibold text-white", "{cert.cert}" }
+                                h3 { class: "text-lg font-semibold text-white", "{cert.cert}" }
                             }
                             br {}
                         }

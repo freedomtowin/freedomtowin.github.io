@@ -78,7 +78,7 @@ pub fn ExpandableBar(props: ExpandableBarProps) -> Element {
             div {
                 class: "deepdiveheader",
                 h2 {
-                    class: "deepdiveheader-title",
+                    class: "deepdiveheader-title p-4",
                     "Resource Links"
                 }
                 button {
@@ -133,7 +133,7 @@ fn LinkItem(props: LinkItemProps) -> Element {
                 href: "{props.url}",
                 target: "_blank",
                 h3 {
-                    class: "text-lg font-semibold txt-gold-rk hover:text-primary transition-colors",
+                    class: "text-lg font-semibold text-accent-purple hover:text-accent-purple-hover transition-colors",
                     "{props.title}"
                 }
                 p {
