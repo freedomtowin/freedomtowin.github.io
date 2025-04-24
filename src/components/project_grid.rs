@@ -4,6 +4,7 @@ use easer::functions::Easing;
 use std::time::Duration;
 
 const TARIFF_TRACKER: Asset = asset!("/assets/tariff_tracker.png");
+const EASY_APPLY_BOT: Asset = asset!("/assets/easy_apply_bot.png");
 
 #[component]
 pub fn ProjectGrid() -> Element {
@@ -19,12 +20,21 @@ pub fn ProjectGrid() -> Element {
             // Project grid with fixed card sizes
             div { class: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6",
                 ProjectCard {
-                    title: "[Rust, Golang, AWS] Tariff Tracker Web App",
+                    title: "[Rust, Dioxus, AWS] Tariff Tracker Web App",
                     description: "A web app tariff tracker will collects new news articles daily, aggregate weekly and summarizes them, then serve them in a protected web app with authentication.",
                     image: TARIFF_TRACKER,
                     tech_stack: vec!["Rust", "Dioxus", "Golang", "AWS"],
                     link: "https://medium.com/lazy-by-design/tariff-tracker-rust-web-app-6f5192f93f88",
                 }
+                ProjectCard {
+                    title: "[ChatGPT, LangGraph] LinkedIn Easy-Apply Bot",
+                    description: "The purpose of this bot was to to reduce the number of mouse clicks when applying to jobs. The bot will automatically navigate job boards with clicking, scrolling, etc, and then ask for then record human input in a database.",
+                    image: EASY_APPLY_BOT,
+                    tech_stack: vec!["Python", "LangGraph"],
+                    link: "https://medium.com/init-deep-dive/linkedin-easy-apply-bot-with-chatgpt-4o-and-langgraph-agent-4ab9f50e017c",
+                }
+                
+                // 
                 // ProjectCard {
                 //     title: "HTML to RSX Converter",
                 //     description: "Convert HTML to Dioxus RSX with a single click. A simple yet powerful tool built with Rust and Dioxus.",
