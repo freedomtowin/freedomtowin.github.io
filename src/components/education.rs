@@ -190,7 +190,7 @@ pub fn Education() -> Element {
 
                             rsx! {
                                 div {
-                                    h3 { class: "text-xl font-semibold txt-gold-rk", "{school.degree}" }
+                                    h3 { class: "text-xl font-semibold text-white", "{school.degree}" }
                                     p { class: "txt-gray-blue-rk", "{school.year}" }
                                     p { class: "txt-gray-blue-rk", "{school.location}" }
                                 }
