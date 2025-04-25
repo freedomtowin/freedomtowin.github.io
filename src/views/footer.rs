@@ -32,7 +32,7 @@ pub fn Footer() -> Element {
                                                     let _ = header.scroll_to(ScrollBehavior::Smooth).await;
                                                 }
                                             }
-                                            "Rust Development" => {
+                                            "Applications" => {
                                                 if let Some(header) = PROJECT_GRID.cloned() {
                                                     let _ = header.scroll_to(ScrollBehavior::Smooth).await;
                                                 }

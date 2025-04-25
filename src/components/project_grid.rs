@@ -12,10 +12,10 @@ pub fn ProjectGrid() -> Element {
         div { id: "projects", class: "container mx-auto px-4 py-12",
             // Section header
             h2 { class: "text-3xl font-bold bg-clip-text txt-purple-rk mb-2",
-                "Rust Cross-Platform Application Development"
+                "Application Development"
             }
             p { class: "txt-purple-rk mb-8",
-                "A collection of live documents that track my development progress in various cross-platform dioxus applications."
+                "A collection of live documents that track my development progress in various applications."
             }
             // Project grid with fixed card sizes
             div { class: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6",

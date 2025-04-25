@@ -57,7 +57,7 @@ pub fn Education() -> Element {
                     location: "University of New Orleans".to_string()
                 },
                 School { 
-                    degree: "Data Engineering Nanodegree - Udacity".to_string(),
+                    degree: "Data Engineering Nanodegree".to_string(),
                     year: "2021".to_string(),
                     location: "Udacity".to_string()
                 }
