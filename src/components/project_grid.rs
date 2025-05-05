@@ -32,6 +32,13 @@ pub fn ProjectGrid() -> Element {
                     image: EASY_APPLY_BOT,
                     tech_stack: vec!["Python", "LangGraph"],
                     link: "https://medium.com/init-deep-dive/linkedin-easy-apply-bot-with-chatgpt-4o-and-langgraph-agent-4ab9f50e017c",
+                },
+                ProjectCard {
+                    title: "“Fat Chance” Editor in Dioxus Rust",
+                    description: "Fat Chance editor started as a simple file editor, but has grown to include more features like syntax highlighting, terminal commands, and AI integrations. It is built with Dioxus Rust.",
+                    image: EASY_APPLY_BOT,
+                    tech_stack: vec!["Python", "LangGraph"],
+                    link: "https://rohankotwani.medium.com/fat-chance-editor-in-dioxus-rust-efa2b6d437c0",
                 }
                 
                 // 
