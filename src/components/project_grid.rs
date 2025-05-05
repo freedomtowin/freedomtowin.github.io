@@ -5,6 +5,7 @@ use std::time::Duration;
 
 const TARIFF_TRACKER: Asset = asset!("/assets/tariff_tracker.png");
 const EASY_APPLY_BOT: Asset = asset!("/assets/easy_apply_bot.png");
+const FAT_CHANCE_EDITOR: Asset = asset!("/assets/fat_chance_editor.png");
 
 #[component]
 pub fn ProjectGrid() -> Element {
@@ -36,7 +37,7 @@ pub fn ProjectGrid() -> Element {
                 ProjectCard {
                     title: "“Fat Chance” Editor in Dioxus Rust",
                     description: "Fat Chance editor started as a simple file editor, but has grown to include more features like syntax highlighting, terminal commands, and AI integrations. It is built with Dioxus Rust.",
-                    image: EASY_APPLY_BOT,
+                    image: FAT_CHANCE_EDITOR,
                     tech_stack: vec!["Python", "LangGraph"],
                     link: "https://rohankotwani.medium.com/fat-chance-editor-in-dioxus-rust-efa2b6d437c0",
                 }
