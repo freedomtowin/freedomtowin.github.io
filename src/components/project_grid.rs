@@ -6,6 +6,7 @@ use std::time::Duration;
 const TARIFF_TRACKER: Asset = asset!("/assets/tariff_tracker.png");
 const EASY_APPLY_BOT: Asset = asset!("/assets/easy_apply_bot.png");
 const FAT_CHANCE_EDITOR: Asset = asset!("/assets/fat_chance_editor.png");
+const VOICE_CLONE: Asset = asset!("/assets/voice_clone_cover.png");
 
 #[component]
 pub fn ProjectGrid() -> Element {
@@ -40,6 +41,13 @@ pub fn ProjectGrid() -> Element {
                     image: FAT_CHANCE_EDITOR,
                     tech_stack: vec!["Python", "LangGraph"],
                     link: "https://rohankotwani.medium.com/fat-chance-editor-in-dioxus-rust-efa2b6d437c0",
+                },
+                ProjectCard {
+                    title: "Voice Cloning with Tacotron2 and HiFi-GAN",
+                    description: "The strategies and training steps I used to finetune voice clones, Jason Thor Hall (Pirate Software) & Philomena & Norm Macdonald, with Tacotron2 and Hifi-Gan.",
+                    image: VOICE_CLONE,
+                    tech_stack: vec!["Python", "PyTorch"],
+                    link: "https://medium.com/init-deep-dive/voice-cloning-with-tacotron2-and-hifi-gan-30193180be32",
                 }
                 
                 // 
