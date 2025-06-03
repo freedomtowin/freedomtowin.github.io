@@ -107,6 +107,7 @@ pub fn Education() -> Element {
                     rsx! {
                         h3 { class: "font-medium txt-dark-purple-rk", "Certifications & Achievements" }
                     }
+
             }
         }
         }
@@ -229,7 +230,7 @@ pub fn Education() -> Element {
     rsx! {
         div { id: "experience", class: "container mx-auto px-4 py-12 overflow-x-hidden",
             h2 { class: "text-3xl font-bold bg-clip-text text-transparent bg-purple-rk mb-8",
-                "Education & Achievments"
+                "Education & Achievements"
             }
             div { class: "flex flex-col md:flex-row gap-6 md:gap-8",
                 div {
