@@ -22,6 +22,14 @@ pub fn ProjectGrid() -> Element {
             // Project grid with fixed card sizes
             div { class: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6",
                 ProjectCard {
+                    title: "Custom RAG FAQ Search, an AI Power Search Engine",
+                    description: "The purpose of this experiment was to see if I could build an AI powered search engine in 100% Rust and to see if a RAG powered search engine could be used to 1) run in WASM, or within the browser's memory and 2) produce good to decent results.",
+                    image: VOICE_CLONE,
+                    tech_stack: vec!["Rust", "PyTorch", "Dioxus", "AWS"],
+                    link: "https://medium.com/lazy-by-design/dioxus-faq-search-an-ai-power-search-engine-c7173d92d626",
+                },
+                
+                ProjectCard {
                     title: "[Rust, Dioxus, AWS] Tariff Tracker Web App",
                     description: "A web app tariff tracker will collects new news articles daily, aggregate weekly and summarizes them, then serve them in a protected web app with authentication.",
                     image: TARIFF_TRACKER,
