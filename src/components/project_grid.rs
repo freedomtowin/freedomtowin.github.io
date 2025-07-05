@@ -7,6 +7,7 @@ const TARIFF_TRACKER: Asset = asset!("/assets/tariff_tracker.png");
 const EASY_APPLY_BOT: Asset = asset!("/assets/easy_apply_bot.png");
 const FAT_CHANCE_EDITOR: Asset = asset!("/assets/fat_chance_editor.png");
 const VOICE_CLONE: Asset = asset!("/assets/voice_clone_cover.png");
+const FAQ_SEARCH: Asset = asset!("/assets/faq_search.png");
 
 #[component]
 pub fn ProjectGrid() -> Element {
@@ -24,7 +25,7 @@ pub fn ProjectGrid() -> Element {
                 ProjectCard {
                     title: "Custom RAG FAQ Search, an AI Power Search Engine",
                     description: "The purpose of this experiment was to see if I could build an AI powered search engine in 100% Rust and to see if a RAG powered search engine could be used to 1) run in WASM, or within the browser's memory and 2) produce good to decent results.",
-                    image: VOICE_CLONE,
+                    image: FAQ_SEARCH,
                     tech_stack: vec!["Rust", "PyTorch", "Dioxus", "AWS"],
                     link: "https://medium.com/lazy-by-design/dioxus-faq-search-an-ai-power-search-engine-c7173d92d626",
                 },
