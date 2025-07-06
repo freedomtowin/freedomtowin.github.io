@@ -39,7 +39,7 @@ pub fn ProjectGrid() -> Element {
                 }
                 ProjectCard {
                     title: "[ChatGPT, LangGraph] LinkedIn Easy-Apply Bot",
-                    description: "The purpose of this bot was to to reduce the number of mouse clicks when applying to jobs. The bot will automatically navigate job boards with clicking, scrolling, etc, and then ask for then record human input in a database.",
+                    description: "An AI agent built to automatically navigate job boards with AI clicking, scrolling, typing, etc, and to ask for then record human input into a database, for when the agent is unsure.",
                     image: EASY_APPLY_BOT,
                     tech_stack: vec!["Python", "LangGraph"],
                     link: "https://medium.com/init-deep-dive/linkedin-easy-apply-bot-with-chatgpt-4o-and-langgraph-agent-4ab9f50e017c",
