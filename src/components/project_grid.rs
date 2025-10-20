@@ -5,7 +5,7 @@ use std::time::Duration;
 
 const TARIFF_TRACKER: Asset = asset!("/assets/tariff_tracker.png");
 const EASY_APPLY_BOT: Asset = asset!("/assets/easy_apply_bot.png");
-const FAT_CHANCE_EDITOR: Asset = asset!("/assets/fat_chance_editor.png");
+const FAT_CHANCE_EDITOR: Asset = asset!("/assets/fat_chance_v2.png");
 const VOICE_CLONE: Asset = asset!("/assets/voice_clone_cover.png");
 const FAQ_SEARCH: Asset = asset!("/assets/faq_search.png");
 
@@ -22,6 +22,13 @@ pub fn ProjectGrid() -> Element {
             }
             // Project grid with fixed card sizes
             div { class: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6",
+                ProjectCard {
+                    title: "Fat Chance Editor",
+                    description: "A tightly interlocked editor, file tree, terminal (and AI) that allows the terminal to access the application's state. Useful for fast context switching.",
+                    image: FAT_CHANCE_EDITOR,
+                    tech_stack: vec!["Rust", "Dioxus", "Desktop"],
+                    link: "https://medium.com/lazy-by-design/fat-chance-editor-in-dioxus-rust-efa2b6d437c0",
+                },            
                 ProjectCard {
                     title: "Custom RAG FAQ Search, an AI Power Search Engine",
                     description: "An AI powered search engine in 100% Rust. A custom RAG powered search engine that 1) runs in WASM, or within the browser's memory and 2) produces good to decent results.",
@@ -44,13 +51,13 @@ pub fn ProjectGrid() -> Element {
                     tech_stack: vec!["Python", "LangGraph"],
                     link: "https://medium.com/init-deep-dive/linkedin-easy-apply-bot-with-chatgpt-4o-and-langgraph-agent-4ab9f50e017c",
                 },
-                ProjectCard {
-                    title: "“Fat Chance” Editor in Dioxus Rust",
-                    description: "Fat Chance editor started as a simple file editor, but has grown to include more features like syntax highlighting, terminal commands, and AI integrations. It is built with Dioxus Rust.",
-                    image: FAT_CHANCE_EDITOR,
-                    tech_stack: vec!["Python", "LangGraph"],
-                    link: "https://rohankotwani.medium.com/fat-chance-editor-in-dioxus-rust-efa2b6d437c0",
-                },
+                // ProjectCard {
+                //     title: "“Fat Chance” Editor in Dioxus Rust",
+                //     description: "Fat Chance editor started as a simple file editor, but has grown to include more features like syntax highlighting, terminal commands, and AI integrations. It is built with Dioxus Rust.",
+                //     image: FAT_CHANCE_EDITOR,
+                //     tech_stack: vec!["Python", "LangGraph"],
+                //     link: "https://rohankotwani.medium.com/fat-chance-editor-in-dioxus-rust-efa2b6d437c0",
+                // },
                 ProjectCard {
                     title: "Voice Cloning with Tacotron2 and HiFi-GAN",
                     description: "The strategies and training steps I used to finetune voice clones, Jason Thor Hall (Pirate Software) & Philomena & Norm Macdonald, with Tacotron2 and Hifi-Gan.",
