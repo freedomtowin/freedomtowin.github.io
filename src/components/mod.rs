@@ -19,3 +19,6 @@ pub use deepdive::DeepDiveBlogList;
 
 mod education;
 pub use education::Education;
+
+mod bloglist;
+pub use bloglist::BlogList;

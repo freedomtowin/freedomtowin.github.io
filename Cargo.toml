@@ -20,7 +20,6 @@ desktop = ["dioxus/desktop", "dioxus-motion/desktop"]
 mobile = ["dioxus/mobile", "dioxus-motion/desktop"]
 
 [profile.rapid]
-inherits = "dev"
 opt-level = 1
 incremental = true
 overflow-checks = false
@@ -33,13 +32,3 @@ opt-level = "z"    # Optimize for size.
 lto = true         # Enable link-time optimization.
 codegen-units = 32 #Parallelize codegen across 1 cores
 strip = true       # Automatically strip symbols from the binary.
-
-[profile.wasm-dev]
-inherits = "dev"
-opt-level = 1
-
-[profile.server-dev]
-inherits = "dev"
-
-[profile.android-dev]
-inherits = "dev"

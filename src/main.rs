@@ -1,6 +1,6 @@
 #![allow(non_snake_case)]
 
-use components::{NavBar, Profile, ProjectGrid, WorkExperience, DeepDiveBlogList, Education};
+use components::{NavBar, Profile, ProjectGrid, WorkExperience, BlogList, Education};
 use dioxus::prelude::*;
 use dioxus_logger::tracing::Level;
 
@@ -111,7 +111,7 @@ fn Home() -> Element {
                 onmounted: move |data| {
                     *BLOG_PREVIEW.write() = Some(data);
                 },
-                DeepDiveBlogList {}
+                BlogList {}
             }
             // Footer
             div { Footer {} }
