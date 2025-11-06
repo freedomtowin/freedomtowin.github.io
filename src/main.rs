@@ -2,7 +2,6 @@
 
 use components::{NavBar, Profile, ProjectGrid, WorkExperience, BlogList, Education};
 use dioxus::prelude::*;
-use dioxus_logger::tracing::Level;
 
 use views::{Blog, BlogPreview, Footer};
 mod components;
@@ -27,7 +26,6 @@ pub const HTML_RSX_PIC: Asset = asset!("/assets/html-rsx.png");
 pub const STYLES_CSS: Asset = asset!("/assets/styles.css");
 
 fn main() {
-    dioxus_logger::init(Level::INFO).expect("failed to init logger");
     dioxus::launch(App);
 }
 

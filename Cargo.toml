@@ -4,8 +4,8 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-dioxus = { version = "0.6.1", features = ["router"] }
-dioxus-logger = { version = "0.6.1" }
+dioxus = {git = "https://github.com/DioxusLabs/dioxus.git", features=["router"
+]}
 pulldown-cmark = "0.12.2"
 serde = { version = "1.0.217", features = ["derive"] }
 toml = "0.8.19"
@@ -18,17 +18,3 @@ default = ["web"]
 web = ["dioxus/web", "dioxus-motion/web"]
 desktop = ["dioxus/desktop", "dioxus-motion/desktop"]
 mobile = ["dioxus/mobile", "dioxus-motion/desktop"]
-
-[profile.rapid]
-opt-level = 1
-incremental = true
-overflow-checks = false
-lto = "thin"
-panic = "unwind"
-codegen-units = 32
-
-[profile.release]
-opt-level = "z"    # Optimize for size.
-lto = true         # Enable link-time optimization.
-codegen-units = 32 #Parallelize codegen across 1 cores
-strip = true       # Automatically strip symbols from the binary.
