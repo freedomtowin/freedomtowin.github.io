@@ -6,7 +6,7 @@ edition = "2021"
 [dependencies]
 # dioxus = {git = "https://github.com/DioxusLabs/dioxus.git", features=["router"
 # ]}
-dioxus = {version = "0.7.0", features=["router", "fullstack"]}
+dioxus = {version = "0.7.0", features=["router", "web"]}
 pulldown-cmark = "0.12.2"
 serde = { version = "1.0.217", features = ["derive"] }
 toml = "0.8.19"
