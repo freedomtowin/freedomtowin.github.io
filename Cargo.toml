@@ -4,17 +4,19 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-dioxus = {git = "https://github.com/DioxusLabs/dioxus.git", features=["router"
-]}
+# dioxus = {git = "https://github.com/DioxusLabs/dioxus.git", features=["router"
+# ]}
+dioxus = {version = "0.7.0", features=["router", "fullstack"]}
 pulldown-cmark = "0.12.2"
 serde = { version = "1.0.217", features = ["derive"] }
 toml = "0.8.19"
 include_dir = "0.7.3"
-dioxus-motion = { version = "0.2.2", default-features = false, optional = true }
+# dioxus-motion = { version = "0.2.2", default-features = false, optional = true }
 easer = { version = "0.3.0", default-features = false }
+dioxus-motion = "0.3.2"
 
 [features]
 default = ["web"]
-web = ["dioxus/web", "dioxus-motion/web"]
-desktop = ["dioxus/desktop", "dioxus-motion/desktop"]
-mobile = ["dioxus/mobile", "dioxus-motion/desktop"]
+web = ["dioxus/web"]
+desktop = ["dioxus/desktop"]
+mobile = ["dioxus/mobile"]

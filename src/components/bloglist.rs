@@ -44,7 +44,7 @@ pub struct ExpandableBarProps {
 #[component]
 pub fn ExpandableBar(props: ExpandableBarProps) -> Element {
     // State to control the expansion of the bar
-    let mut is_expanded = use_signal(|| false);
+    let mut is_expanded = use_signal(|| true);
 
     // Toggle expansion
     let toggle_expansion = move |_| {
