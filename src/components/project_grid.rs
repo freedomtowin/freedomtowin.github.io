@@ -30,7 +30,7 @@ pub fn ProjectGrid() -> Element {
                     link: "https://medium.com/lazy-by-design/fat-chance-editor-in-dioxus-rust-efa2b6d437c0",
                 },            
                 ProjectCard {
-                    title: "Custom RAG FAQ Search, an AI Power Search Engine",
+                    title: "Custom RAG FAQ Search Website",
                     description: "An AI powered search engine in 100% Rust. A custom RAG powered search engine that 1) runs in WASM, or within the browser's memory and 2) produces good to decent results.",
                     image: FAQ_SEARCH,
                     tech_stack: vec!["Rust", "PyTorch", "Dioxus", "AWS"],
